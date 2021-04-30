@@ -54,23 +54,23 @@ TO DO:
 
 Pre-work:
 - download the data from gapminder and upload it to the _raw
-- decide which year to take from each table and add the year to the README
+- decide which year to take from each table and add the year to the README  
 01_load: 
 - load the raw dataframes
 - take the columns that we need
 - change column name to describe attribute
-- save each dataframe again (many files, with each having only two columns)
+- save each dataframe again (many files, with each having only two columns)  
 02_clean:
 - load all data frames
 - for the covid counts file: add up up the numbers, so that only one row for each country
 - join the dataframes 
 - only take the rows that we need
 - check that all countries are included! (length of gapminder table == length of new table)
-- save cleaned dataframe (only one file)
+- save cleaned dataframe (only one file)  
 03_augment:
 - load cleaned dataframe
 - create the additional attributes (total cases / 100k people, total deaths / 100k people, fatality rate, continent, population density)
-- save dataframe ready for analysis
+- save dataframe ready for analysis  
 04_analysis:
 - PCA
 - ?
