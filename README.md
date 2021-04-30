@@ -1,6 +1,14 @@
 # 2021_group_17
 Final project repository
 
+How to edit file: When work is in progress and its pushed, mark it like this:
+\# Annette
+y = work in progress
+z = more work
+\# Annette
+
+
+
 Idea 1:
 - x: Gapminder statistics
 - y: total cases / 100k people
@@ -47,13 +55,11 @@ TO DO:
 Pre-work:
 - download the data from gapminder and upload it to the _raw
 - decide which year to take from each table and add the year to the README
-
 01_load: 
 - load the raw dataframes
 - take the columns that we need
 - change column name to describe attribute
 - save each dataframe again (many files, with each having only two columns)
-
 02_clean:
 - load all data frames
 - for the covid counts file: add up up the numbers, so that only one row for each country
@@ -61,16 +67,20 @@ Pre-work:
 - only take the rows that we need
 - check that all countries are included! (length of gapminder table == length of new table)
 - save cleaned dataframe (only one file)
-
 03_augment:
 - load cleaned dataframe
 - create the additional attributes (total cases / 100k people, total deaths / 100k people, fatality rate, continent, population density)
 - save dataframe ready for analysis
-
-04_analysis
+04_analysis:
 - PCA
 - ?
 
+Work split up until next monday:
+- Annette:
+- Matthias:
+- Thomas: 01_load and 02_clean for the covid data (datafiles 01,02,03)
+- Carlotta:
+-
 Things to ask Leon:
 
 - Correlation problem? 
