@@ -12,31 +12,59 @@ Idea 2:
 - x: Day (starting with the day of 10th infection)
 - y: total cases
 
+John Hopkins data:
+- 01: time series covid19 confirmed
+- 02: time series covid19 deaths
+- 03: Population count (IUD)
+
 Gapminder statistics:
-- Urban population (% of total)
-- Life expenctancy (years)
-- Smoking adults
-- alcohol consumption
-- Body Mass Index, men
-- Body Mass Index, women
-- Blood pressure, men 
-- Blood pressure, women
-- Fat in blood, men
-- Fat in blood, women
-- Govt. health spending / person (US$)
-- Total health spending / person (US$)
-- Working hours per week
-- Democracy score
-- Corruption Perception index 
-- Percentage of women in parliaments
-- Income per person (GDP/capita, PPP inflation-adjusted)
-- At least basic sanitation, overall access (%)
-- Land area (sq. km) -> to calculate Population density
+
+- 04: Urban population (% of total)
+- 05: Life expenctancy (years)
+- 06: Smoking adults
+- 07: alcohol consumption
+- 08: Body Mass Index, men
+- 09: Body Mass Index, women
+- 10: Blood pressure, men 
+- 11: Blood pressure, women
+- 12: Fat in blood, men
+- 13: Fat in blood, women
+- 14: Govt. health spending / person (US$)
+- 15: Total health spending / person (US$)
+- 16: Working hours per week
+- 17: Democracy score
+- 18: Corruption Perception index 
+- 19: Percentage of women in parliaments
+- 20: Income per person (GDP/capita, PPP inflation-adjusted)
+- 21: At least basic sanitation, overall access (%)
+- 22: Land area (sq. km) -> to calculate Population density
 
 
 TO DO:
-- find interesting tables from gapminder
-- create y variable
-- join all the tables
-- Create new variables: Population density, Continent,
-- 
+
+Pre-work:
+- download the data from gapminder and upload it to the _raw
+- decide which year to take from each table and add the year to the README
+
+01_load: 
+- load the raw dataframes
+- take the columns that we need
+- change column name to describe attribute
+- save each dataframe again (many files, with each having only two columns)
+
+02_clean:
+- load all data frames
+- for the covid counts file: add up up the numbers, so that only one row for each country
+- join the dataframes 
+- only take the rows that we need
+- check that all countries are included! (length of gapminder table == length of new table)
+- save cleaned dataframe (only one file)
+
+03_augment:
+- load cleaned dataframe
+- create the additional attributes (total cases / 100k people, Continent, population density)
+- save dataframe ready for analysis
+
+04_analysis
+- PCA
+- ?
