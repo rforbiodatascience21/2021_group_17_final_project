@@ -23,14 +23,14 @@ Gapminder statistics:
 - Blood pressure, women
 - Fat in blood, men
 - Fat in blood, women
-- Total health spending
 - Govt. health spending / person (US$)
-- Total healt spending / person (US$)
+- Total health spending / person (US$)
 - Working hours per week
 - Democracy score
 - Corruption Perception index 
 - Percentage of women in parliaments
 - Income per person (GDP/capita, PPP inflation-adjusted)
+- At least basic sanitation, overall access (%)
 
 
 TO DO:
