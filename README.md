@@ -37,4 +37,5 @@ TO DO:
 - find interesting tables from gapminder
 - create y variable
 - join all the tables
+- Create new variables: Population density, Continent,
 - 
