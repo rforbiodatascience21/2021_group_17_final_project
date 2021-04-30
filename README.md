@@ -31,6 +31,7 @@ Gapminder statistics:
 - Percentage of women in parliaments
 - Income per person (GDP/capita, PPP inflation-adjusted)
 - At least basic sanitation, overall access (%)
+- Land area (sq. km) -> to calculate Population density
 
 
 TO DO:
