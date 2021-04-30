@@ -1,7 +1,8 @@
 # 2021_group_17
-Final project repository
+### Final project repository
 
-How to edit file: When work is in progress and its pushed, mark it like this:  
+## How to edit file: 
+When work is in progress and its pushed, mark it like this:  
 \# Annette  
 y = work in progress  
 z = more work  
