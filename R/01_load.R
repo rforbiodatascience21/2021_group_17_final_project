@@ -11,13 +11,27 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-my_data_raw <- read_tsv(file = "data/_raw/my_raw_data.tsv")
+cases_data_raw <- read_csv(file = "data/_raw/time_series_covid19_confirmed_global.csv")
+deaths_data_raw <- read_csv(file = "data/_raw/time_series_covid19_deaths_global.csv")
+regions_data_raw <- read_csv(file = "data/_raw/UID_ISO_FIPS_LookUp_Table.csv")
 
 
 # Wrangle data ------------------------------------------------------------
-my_data <- my_data_raw # %>% ...
+#get number of cases/deaths from last day (29th of April)
+cases_data_raw <- cases_data_raw %>%
+  select('Province/State', 'Country/Region', '4/29/21') %>% 
+  rename('Cases' = '4/29/21')
+
+deaths_data_raw <- deaths_data_raw %>%
+  select('Province/State', 'Country/Region', '4/29/21') %>% 
+  rename('Deaths' = '4/29/21')
+
+#get countries, combined key and population (combined key used for cleaning)
+regions_data_raw <- regions_data_raw %>% 
+  select('Combined_Key', 'Country_Region', 'Population')
 
 
 # Write data --------------------------------------------------------------
-write_tsv(x = my_data,
-          file = "data/01_my_data.tsv")
+write_tsv(x = cases_data_raw, file = "data/01_cases.tsv")
+write_tsv(x = deaths_data_raw, file = "data/01_deaths.tsv")
+write_tsv(x = regions_data_raw, file = "data/01_regions.tsv")

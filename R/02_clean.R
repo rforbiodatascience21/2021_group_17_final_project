@@ -11,11 +11,14 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-my_data <- read_tsv(file = "data/01_my_data.tsv")
+cases <- read_tsv(file = "data/01_cases.tsv")
+deaths <- read_tsv(file = "data/01_deaths.tsv")
+regions <- read_tsv(file = "data/01_regions.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-my_data_clean <- my_data # %>% ...
+#only include countries not cities/districts
+#remove missing values
 
 
 # Write data --------------------------------------------------------------
