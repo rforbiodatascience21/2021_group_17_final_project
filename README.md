@@ -1,7 +1,7 @@
 # 2021_group_17
-### Final project repository
+Final project repository
 
-## How to edit file: 
+### How to edit file: 
 When work is in progress and its pushed, mark it like this:  
 \# Annette  
 y = work in progress  
@@ -23,13 +23,14 @@ Two analysis for y and y2, then compare with with each other!
 - x: Day (starting with the day of 10th infection)
 - y: total cases
 
-## John Hopkins data:
+## Raw data:
+
+### John Hopkins data
 - 01: time series covid19 confirmed
 - 02: time series covid19 deaths
 - 03: Population count (IUD)
 
-## Gapminder statistics:
-
+### Gapminder statistics
 - 04: Urban population (% of total)
 - 05: Life expenctancy (years)
 - 06: Smoking adults
@@ -79,7 +80,7 @@ Pre-work:
 - PCA
 - ?
 
-## Work split up until next monday:
+### Work split up until next monday:
 - Annette: 04-13, prework and 01_load
 - Matthias: 14-22, prework and 01_load
 - Thomas: 01_load and 02_clean for the covid data (datafiles 01,02,03)
