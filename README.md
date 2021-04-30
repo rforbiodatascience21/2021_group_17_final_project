@@ -4,7 +4,9 @@ Final project repository
 Idea 1:
 - x: Gapminder statistics
 - y: total cases / 100k people
-- y2: excess mortality / 100k people (2020 vs. 2019/2018/2017) -> find the data!
+- y2: total deaths / 100k people
+- y3: fatality rate
+- alternative y: excess mortality / 100k people (2020 vs. 2019/2018/2017) -> find the data!
 Two analysis for y and y2, then compare with with each other!
 - alternative y:  total cases/ 100k people / number of days since 10th case 
 
