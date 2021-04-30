@@ -64,7 +64,7 @@ Pre-work:
 
 03_augment:
 - load cleaned dataframe
-- create the additional attributes (total cases / 100k people, Continent, population density)
+- create the additional attributes (total cases / 100k people, total deaths / 100k people, fatality rate, continent, population density)
 - save dataframe ready for analysis
 
 04_analysis
