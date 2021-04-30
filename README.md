@@ -76,11 +76,11 @@ Pre-work:
 - ?
 
 Work split up until next monday:
-- Annette:
-- Matthias:
+- Annette: 04-13, prework and 01_load
+- Matthias: 14-22, prework and 01_load
 - Thomas: 01_load and 02_clean for the covid data (datafiles 01,02,03)
-- Carlotta:
--
+- Carlotta: finish 02_clean or write sceleton for it, in case the files are not ready yet
+
 Things to ask Leon:
 
 - Correlation problem? 
