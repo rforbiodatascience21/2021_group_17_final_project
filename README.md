@@ -2,10 +2,10 @@
 Final project repository
 
 How to edit file: When work is in progress and its pushed, mark it like this:
-\# Annette
-y = work in progress
-z = more work
-\# Annette
+\# Annette  
+y = work in progress  
+z = more work  
+\# Annette  
 
 
 
