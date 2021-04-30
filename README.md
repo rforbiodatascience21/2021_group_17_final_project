@@ -9,7 +9,7 @@ Two analysis for y and y2, then compare with with each other!
 - alternative y:  total cases/ 100k people / number of days since 10th case 
 
 Idea 2:
-- x: Day (starting with the day of first infection)
+- x: Day (starting with the day of 10th infection)
 - y: total cases
 
 Gapminder statistics:
