@@ -68,3 +68,8 @@ Pre-work:
 04_analysis
 - PCA
 - ?
+
+Things to ask Leon:
+
+- Correlation problem? 
+- Final presentation: using premade tables?
