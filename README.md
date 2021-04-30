@@ -10,6 +10,9 @@ Idea 2:
 - x: Day (starting with the day of first infection)
 - y: total cases
 
+Gapminder statistics:
+- Urban population (% of total)
+
 TO DO:
 - find interesting tables from gapminder
 - create y variable
