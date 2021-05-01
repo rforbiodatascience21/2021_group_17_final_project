@@ -32,16 +32,16 @@ Two analysis for y and y2, then compare with with each other!
 
 ### Gapminder statistics
 https://www.gapminder.org/data/
-- 04: Urban population (% of total) - 2019 (https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS)
-- 05: Life expenctancy (years)
-- 06: Smoking adults
-- 07: alcohol consumption
-- 08: Body Mass Index, men
-- 09: Body Mass Index, women
-- 10: Blood pressure, men 
-- 11: Blood pressure, women
-- 12: Fat in blood, men
-- 13: Fat in blood, women
+- 04: Urban population (% of total) - [2019] (https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS)
+- 05: Life expenctancy (years) - [2017] (http://gapm.io/ilex)
+- 06: Smoking adults - [2015] (https://www.who.int/gho/en/)
+- 07: alcohol consumption - [2008] (https://www.who.int/gho/en/)
+- 08: Body Mass Index, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 09: Body Mass Index, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 10: Blood pressure, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 11: Blood pressure, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 12: Fat in blood, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 13: Fat in blood, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
 - 14: Govt. health spending / person (US$)
 - 15: Total health spending / person (US$)
 - 16: Working hours per week
