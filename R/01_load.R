@@ -29,10 +29,49 @@ data04_raw <- data04_raw  %>%
 data05_raw <- data05_raw  %>% 
   select(country, X2017) %>% 
   rename(LifeExp = X2017)
-
+data06_raw <- data06_raw  %>% 
+  select(country, X2005) %>% 
+  rename(Smoking = X2005)
+data07_raw <- data07_raw  %>% 
+  select(country, X2008) %>% 
+  rename(AlcConsump = X2008)
+data08_raw <- data08_raw  %>% 
+  select(country, X2008) %>% 
+  rename(BMI_m = X2008)
+data09_raw <- data09_raw  %>% 
+  select(country, X2008) %>% 
+  rename(BMI_f = X2008)
+data10_raw <- data10_raw  %>% 
+  select(country, X2008) %>% 
+  rename(SBP_m = X2008)
+data11_raw <- data11_raw  %>% 
+  select(country, X2008) %>% 
+  rename(SBP_f = X2008)
+data12_raw <- data12_raw  %>% 
+  select(country, X2008) %>% 
+  rename(cholesterol_m = X2008)
+data13_raw <- data13_raw  %>% 
+  select(country, X2008) %>% 
+  rename(cholesterol_f = X2008)
 
 # Write data --------------------------------------------------------------
 write_tsv(x = data04_raw, 
-          file = "data/01_data04_UrbanPop.tsv")
+          file = "data/01_04UrbanPop.tsv")
 write_tsv(x = data05_raw, 
-          file = "data/01_data05_LifeExp.tsv")
+          file = "data/01_05LifeExp.tsv")
+write_tsv(x = data06_raw, 
+          file = "data/01_06Smoking.tsv")
+write_tsv(x = data07_raw, 
+          file = "data/01_07AlcConsump.tsv")
+write_tsv(x = data08_raw, 
+          file = "data/01_08BMI_m.tsv")
+write_tsv(x = data09_raw, 
+          file = "data/01_09BMI_f.tsv")
+write_tsv(x = data10_raw, 
+          file = "data/01_10SBP_m.tsv")
+write_tsv(x = data11_raw, 
+          file = "data/01_11SBP_f.tsv")
+write_tsv(x = data12_raw, 
+          file = "data/01_12cholesterol_m.tsv")
+write_tsv(x = data13_raw, 
+          file = "data/01_13cholesterol_f.tsv")
