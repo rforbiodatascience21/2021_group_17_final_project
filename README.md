@@ -78,7 +78,7 @@ Pre-work:
 
 04_analysis:
 - PCA
-- ?
+- linear regression
 
 ### Work split up until next monday:
 - Annette: 04-13, prework and 01_load
