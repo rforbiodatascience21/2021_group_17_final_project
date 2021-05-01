@@ -21,6 +21,15 @@ data10_raw <- read.csv(file = "data/_raw/10_blood_pressure_sbp_men_mmhg.csv")
 data11_raw <- read.csv(file = "data/_raw/11_blood_pressure_sbp_women_mmhg.csv")
 data12_raw <- read.csv(file = "data/_raw/12_cholesterol_fat_in_blood_men_mmolperl.csv")
 data13_raw <- read.csv(file = "data/_raw/13_cholesterol_fat_in_blood_women_mmolperl.csv")
+data14_raw <- read.csv(file = "data/_raw/14_government_health_spending_per_person_us.csv")
+data15_raw <- read.csv(file = "data/_raw/15_total_health_spending_per_person_us.csv")
+data16_raw <- read.csv(file = "data/_raw/16_working_hours_per_week.csv")
+data17_raw <- read.csv(file = "data/_raw/17_democracy_score_use_as_color.csv")
+data18_raw <- read.csv(file = "data/_raw/18_corruption_perception_index_cpi.csv")
+data19_raw <- read.csv(file = "data/_raw/19_wn_bothhouses_c.csv")
+data20_raw <- read.csv(file = "data/_raw/20_income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
+data21_raw <- read.csv(file = "data/_raw/21_at_least_basic_sanitation_overall_access_percent.csv")
+data22_raw <- read.csv(file = "data/_raw/22_ag_lnd_totl_k2.csv")
 
 # Wrangle data ------------------------------------------------------------
 data04_raw <- data04_raw  %>% 
@@ -53,6 +62,34 @@ data12_raw <- data12_raw  %>%
 data13_raw <- data13_raw  %>% 
   select(country, X2008) %>% 
   rename(cholesterol_f = X2008)
+data14_raw <- data14_raw  %>% 
+  select(country, X2010) %>% 
+  rename(GovtHealthUSD_pp = X2010)
+data15_raw <- data15_raw  %>% 
+  select(country, X2010) %>% 
+  rename(TotHealthUSD_pp = X2010)
+data16_raw <- data16_raw  %>% 
+  select(country, X2015) %>% 
+  rename(WorkHours = X2015)
+data17_raw <- data17_raw  %>% 
+  select(country, X2011) %>% 
+  rename(DemScore = X2011)
+data18_raw <- data18_raw  %>% 
+  select(country, X2017) %>% 
+  rename(CPI = X2017)
+data19_raw <- data19_raw  %>% 
+  select(country, X2020) %>% 
+  rename(WomanInParlia = X2020)
+data20_raw <- data20_raw  %>% 
+  select(country, X2021) %>% 
+  rename(Income_pp = X2021)
+data21_raw <- data21_raw  %>% 
+  select(country, X2017) %>% 
+  rename(BasicSaniAcc = X2017)
+data22_raw <- data22_raw  %>% 
+  select(country, X2018) %>% 
+  rename(LandSqkm = X2018)
+
 
 # Write data --------------------------------------------------------------
 write_tsv(x = data04_raw, 
@@ -75,3 +112,21 @@ write_tsv(x = data12_raw,
           file = "data/01_12cholesterol_m.tsv")
 write_tsv(x = data13_raw, 
           file = "data/01_13cholesterol_f.tsv")
+write_tsv(x = data14_raw, 
+          file = "data/01_14GovtHealthUSD_pp.tsv")
+write_tsv(x = data15_raw, 
+          file = "data/01_15TotHealthUSD_pp.tsv")
+write_tsv(x = data16_raw, 
+          file = "data/01_16WorkHours.tsv")
+write_tsv(x = data17_raw, 
+          file = "data/01_17DemScore.tsv")
+write_tsv(x = data18_raw, 
+          file = "data/01_18CPI.tsv")
+write_tsv(x = data19_raw, 
+          file = "data/01_19WomanInParlia.tsv")
+write_tsv(x = data20_raw, 
+          file = "data/01_20Income_pp.tsv")
+write_tsv(x = data21_raw, 
+          file = "data/01_21BasicSaniAcc.tsv")
+write_tsv(x = data22_raw, 
+          file = "data/01_22LandSqkm.tsv")

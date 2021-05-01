@@ -42,8 +42,8 @@ https://www.gapminder.org/data/
 - 11: Blood pressure, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
 - 12: Fat in blood, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
 - 13: Fat in blood, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
-- 14: Govt. health spending / person (US$) - [2009] (https://www.who.int/data/gho)
-- 15: Total health spending / person (US$) - [2009] (https://www.who.int/data/gho)
+- 14: Govt. health spending / person (US$) - [2010] (https://www.who.int/data/gho)
+- 15: Total health spending / person (US$) - [2010] (https://www.who.int/data/gho)
 - 16: Working hours per week - [2015] - (https://ilostat.ilo.org/) #A lot of data is missing
 - 17: Democracy score - [2011] (https://www.systemicpeace.org/polityproject.html)
 - 18: Corruption Perception index - [2017] (https://www.transparency.org/en/cpi/2020/index/nzl) 
