@@ -31,6 +31,7 @@ Two analysis for y and y2, then compare with with each other!
 - 03: Population count (IUD)
 
 ### Gapminder statistics
+https://www.gapminder.org/data/
 - 04: Urban population (% of total) - 2019 (https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS)
 - 05: Life expenctancy (years)
 - 06: Smoking adults
