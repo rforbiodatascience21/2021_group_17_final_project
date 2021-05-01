@@ -34,7 +34,7 @@ Two analysis for y and y2, then compare with with each other!
 https://www.gapminder.org/data/
 - 04: Urban population (% of total) - [2019] (https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS)
 - 05: Life expenctancy (years) - [2017] (http://gapm.io/ilex)
-- 06: Smoking adults - [2015] (https://www.who.int/gho/en/)
+- 06: Smoking adults - [2005] (https://www.who.int/gho/en/)
 - 07: alcohol consumption - [2008] (https://www.who.int/gho/en/)
 - 08: Body Mass Index, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
 - 09: Body Mass Index, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
