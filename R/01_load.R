@@ -11,32 +11,10 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-<<<<<<< HEAD
 cases_data_raw <- read_csv(file = "data/_raw/time_series_covid19_confirmed_global.csv")
 deaths_data_raw <- read_csv(file = "data/_raw/time_series_covid19_deaths_global.csv")
 regions_data_raw <- read_csv(file = "data/_raw/UID_ISO_FIPS_LookUp_Table.csv")
 
-
-# Wrangle data ------------------------------------------------------------
-#get number of cases/deaths from last day (29th of April)
-cases_data_raw <- cases_data_raw %>%
-  select('Province/State', 'Country/Region', '4/29/21') %>% 
-  rename('Cases' = '4/29/21')
-
-deaths_data_raw <- deaths_data_raw %>%
-  select('Province/State', 'Country/Region', '4/29/21') %>% 
-  rename('Deaths' = '4/29/21')
-
-#get countries, combined key and population (combined key used for cleaning)
-regions_data_raw <- regions_data_raw %>% 
-  select('Combined_Key', 'Country_Region', 'Population')
-
-
-# Write data --------------------------------------------------------------
-write_tsv(x = cases_data_raw, file = "data/01_cases.tsv")
-write_tsv(x = deaths_data_raw, file = "data/01_deaths.tsv")
-write_tsv(x = regions_data_raw, file = "data/01_regions.tsv")
-=======
 data04_raw <- read.csv(file = "data/_raw/04_urban_population_percent_of_total.csv")
 data05_raw <- read.csv(file = "data/_raw/05_life_expectancy_years.csv")
 data06_raw <- read.csv(file = "data/_raw/06_smoking_adults_percent_of_population_over_age_15.csv")
@@ -57,7 +35,21 @@ data20_raw <- read.csv(file = "data/_raw/20_income_per_person_gdppercapita_ppp_i
 data21_raw <- read.csv(file = "data/_raw/21_at_least_basic_sanitation_overall_access_percent.csv")
 data22_raw <- read.csv(file = "data/_raw/22_ag_lnd_totl_k2.csv")
 
+
 # Wrangle data ------------------------------------------------------------
+#get number of cases/deaths from last day (29th of April)
+cases_data_raw <- cases_data_raw %>%
+  select('Province/State', 'Country/Region', '4/29/21') %>% 
+  rename('Cases' = '4/29/21')
+
+deaths_data_raw <- deaths_data_raw %>%
+  select('Province/State', 'Country/Region', '4/29/21') %>% 
+  rename('Deaths' = '4/29/21')
+
+#get countries, combined key and population (combined key used for cleaning)
+regions_data_raw <- regions_data_raw %>% 
+  select('Combined_Key', 'Country_Region', 'Population')
+
 data04_raw <- data04_raw  %>% 
   select(country, X2019) %>% 
   rename(UrbanPop = X2019)
@@ -116,8 +108,11 @@ data22_raw <- data22_raw  %>%
   select(country, X2018) %>% 
   rename(LandSqkm = X2018)
 
-
 # Write data --------------------------------------------------------------
+write_tsv(x = cases_data_raw, file = "data/01_cases.tsv")
+write_tsv(x = deaths_data_raw, file = "data/01_deaths.tsv")
+write_tsv(x = regions_data_raw, file = "data/01_regions.tsv")
+
 write_tsv(x = data04_raw, 
           file = "data/01_04UrbanPop.tsv")
 write_tsv(x = data05_raw, 
@@ -156,4 +151,3 @@ write_tsv(x = data21_raw,
           file = "data/01_21BasicSaniAcc.tsv")
 write_tsv(x = data22_raw, 
           file = "data/01_22LandSqkm.tsv")
->>>>>>> e8941dc841fe9efb0553709122e1ee408b594011
