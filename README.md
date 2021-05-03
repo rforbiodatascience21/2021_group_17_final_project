@@ -50,6 +50,7 @@ https://www.gapminder.org/data/
 - 19: Percentage of women in parliaments - [2020] (http://gapm.io/dwparl)
 - 20: Income per person (GDP/capita, PPP inflation-adjusted) - [2021] (https://www.gapminder.org/data/documentation/gd001/) #Projection
 - 21: At least basic sanitation, overall access (%) - [2017] (https://data.worldbank.org/indicator/SH.STA.SMSS.ZS) #2015?
+- 22: Dictionary of countries and continents - (https://github.com/vincentarelbundock/countrycode/blob/main/dictionary/data_regions.csv)
 
 
 ## TO DO:
@@ -90,3 +91,4 @@ Pre-work:
 
 - Correlation problem? 
 - Final presentation: using premade tables?
+- Should we use stringr, to solve issues where the country names are different?
