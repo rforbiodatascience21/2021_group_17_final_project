@@ -32,27 +32,27 @@ data21 <- read_tsv(file = "data/01_21BasicSaniAcc.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-data_clean_x <- data04 %>% 
-  left_join(data05) %>% 
-  left_join(data06) %>% 
-  left_join(data07) %>% 
-  left_join(data08) %>% 
-  left_join(data09) %>% 
-  left_join(data10) %>% 
-  left_join(data11) %>%
-  left_join(data12) %>% 
-  left_join(data13) %>% 
-  left_join(data14) %>% 
-  left_join(data15) %>% 
-  left_join(data16) %>% 
-  left_join(data17) %>% 
-  left_join(data18) %>% 
-  left_join(data19) %>% 
-  left_join(data20) %>% 
-  left_join(data21) %>% 
-  left_join(data22) %>% 
+data_gapminder_clean_x <- data04 %>% 
+  full_join(data05, by="country") %>% 
+  full_join(data06, by="country") %>% 
+  full_join(data07, by="country") %>% 
+  full_join(data08, by="country") %>% 
+  full_join(data09, by="country") %>% 
+  full_join(data10, by="country") %>% 
+  full_join(data11, by="country") %>%
+  full_join(data12, by="country") %>% 
+  full_join(data13, by="country") %>% 
+  full_join(data14, by="country") %>% 
+  full_join(data15, by="country") %>% 
+  full_join(data16, by="country") %>% 
+  full_join(data17, by="country") %>% 
+  full_join(data18, by="country") %>% 
+  full_join(data19, by="country") %>% 
+  full_join(data20, by="country") %>% 
+  full_join(data21, by="country")
+
 
 
 # Write data --------------------------------------------------------------
-#write_tsv(x = my_data_clean,
-          file = "data/02_my_data_clean.tsv")
+write_tsv(x = data_gapminder_clean_x,
+          file = "data/02_gapminder_clean_NA.tsv")
