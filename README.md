@@ -44,13 +44,12 @@ https://www.gapminder.org/data/
 - 13: Fat in blood, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
 - 14: Govt. health spending / person (US$) - [2010] (https://www.who.int/data/gho)
 - 15: Total health spending / person (US$) - [2010] (https://www.who.int/data/gho)
-- 16: Working hours per week - [2015] - (https://ilostat.ilo.org/) #A lot of data is missing
+- 16: Land area (sq. km) -> to calculate Population density - [2018] (http://www.fao.org/home/en/)
 - 17: Democracy score - [2011] (https://www.systemicpeace.org/polityproject.html)
 - 18: Corruption Perception index - [2017] (https://www.transparency.org/en/cpi/2020/index/nzl) 
 - 19: Percentage of women in parliaments - [2020] (http://gapm.io/dwparl)
 - 20: Income per person (GDP/capita, PPP inflation-adjusted) - [2021] (https://www.gapminder.org/data/documentation/gd001/) #Projection
 - 21: At least basic sanitation, overall access (%) - [2017] (https://data.worldbank.org/indicator/SH.STA.SMSS.ZS) #2015?
-- 22: Land area (sq. km) -> to calculate Population density - [2018] (http://www.fao.org/home/en/)
 
 
 ## TO DO:

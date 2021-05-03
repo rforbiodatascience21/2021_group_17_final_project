@@ -23,13 +23,13 @@ data12_raw <- read.csv(file = "data/_raw/12_cholesterol_fat_in_blood_men_mmolper
 data13_raw <- read.csv(file = "data/_raw/13_cholesterol_fat_in_blood_women_mmolperl.csv")
 data14_raw <- read.csv(file = "data/_raw/14_government_health_spending_per_person_us.csv")
 data15_raw <- read.csv(file = "data/_raw/15_total_health_spending_per_person_us.csv")
-data16_raw <- read.csv(file = "data/_raw/16_working_hours_per_week.csv")
+data16_raw <- read.csv(file = "data/_raw/16_ag_lnd_totl_k2.csv")
 data17_raw <- read.csv(file = "data/_raw/17_democracy_score_use_as_color.csv")
 data18_raw <- read.csv(file = "data/_raw/18_corruption_perception_index_cpi.csv")
 data19_raw <- read.csv(file = "data/_raw/19_wn_bothhouses_c.csv")
 data20_raw <- read.csv(file = "data/_raw/20_income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
 data21_raw <- read.csv(file = "data/_raw/21_at_least_basic_sanitation_overall_access_percent.csv")
-data22_raw <- read.csv(file = "data/_raw/22_ag_lnd_totl_k2.csv")
+
 
 # Wrangle data ------------------------------------------------------------
 data04_raw <- data04_raw  %>% 
@@ -69,8 +69,8 @@ data15_raw <- data15_raw  %>%
   select(country, X2010) %>% 
   rename(TotHealthUSD_pp = X2010)
 data16_raw <- data16_raw  %>% 
-  select(country, X2015) %>% 
-  rename(WorkHours = X2015)
+  select(country, X2018) %>% 
+  rename(LandSqkm = X2018)
 data17_raw <- data17_raw  %>% 
   select(country, X2011) %>% 
   rename(DemScore = X2011)
@@ -86,9 +86,7 @@ data20_raw <- data20_raw  %>%
 data21_raw <- data21_raw  %>% 
   select(country, X2017) %>% 
   rename(BasicSaniAcc = X2017)
-data22_raw <- data22_raw  %>% 
-  select(country, X2018) %>% 
-  rename(LandSqkm = X2018)
+
 
 
 # Write data --------------------------------------------------------------
@@ -117,7 +115,7 @@ write_tsv(x = data14_raw,
 write_tsv(x = data15_raw, 
           file = "data/01_15TotHealthUSD_pp.tsv")
 write_tsv(x = data16_raw, 
-          file = "data/01_16WorkHours.tsv")
+          file = "data/01_16LandSqkm.tsv")
 write_tsv(x = data17_raw, 
           file = "data/01_17DemScore.tsv")
 write_tsv(x = data18_raw, 
@@ -128,5 +126,3 @@ write_tsv(x = data20_raw,
           file = "data/01_20Income_pp.tsv")
 write_tsv(x = data21_raw, 
           file = "data/01_21BasicSaniAcc.tsv")
-write_tsv(x = data22_raw, 
-          file = "data/01_22LandSqkm.tsv")
