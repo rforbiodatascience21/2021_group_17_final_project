@@ -11,6 +11,10 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
+cases_data_raw <- read_csv(file = "data/_raw/01_time_series_covid19_confirmed_global.csv")
+deaths_data_raw <- read_csv(file = "data/_raw/02_time_series_covid19_deaths_global.csv")
+regions_data_raw <- read_csv(file = "data/_raw/03_UID_ISO_FIPS_LookUp_Table.csv")
+
 data04_raw <- read.csv(file = "data/_raw/04_urban_population_percent_of_total.csv")
 data05_raw <- read.csv(file = "data/_raw/05_life_expectancy_years.csv")
 data06_raw <- read.csv(file = "data/_raw/06_smoking_adults_percent_of_population_over_age_15.csv")
@@ -32,6 +36,20 @@ data21_raw <- read.csv(file = "data/_raw/21_at_least_basic_sanitation_overall_ac
 
 
 # Wrangle data ------------------------------------------------------------
+#get number of cases/deaths from last day (29th of April)
+cases_data_raw <- cases_data_raw %>%
+  select('Province/State', 'Country/Region', '4/29/21') %>% 
+  rename('Cases' = '4/29/21')
+
+deaths_data_raw <- deaths_data_raw %>%
+  select('Province/State', 'Country/Region', '4/29/21') %>% 
+  rename('Deaths' = '4/29/21')
+
+#get countries, combined key and population (combined key used for cleaning)
+regions_data_raw <- regions_data_raw %>% 
+  select('Combined_Key', 'Country_Region', 'Population') %>% 
+  rename('Country/Region' = 'Country_Region')
+
 data04_raw <- data04_raw  %>% 
   select(country, X2019) %>% 
   rename(UrbanPop = X2019)
