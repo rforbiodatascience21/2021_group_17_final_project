@@ -98,12 +98,6 @@ Pre-work:
 - Create new attributes in 03_augment (**Carlota**)
 
 
-
-- Annette: 04-13, prework and 01_load
-- Matthias: 14-22, prework and 01_load
-- Thomas: 01_load and 02_clean for the covid data (datafiles 01,02,03)
-- Carlotta: finish 02_clean (merging all dataframes) or write draft for it, in case the files are not ready yet
-
 ## Things to ask Leon:
 
 - Final presentation: using premade tables?
