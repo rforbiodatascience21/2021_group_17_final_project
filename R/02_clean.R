@@ -14,6 +14,7 @@ source(file = "R/99_project_functions.R")
 data01 <- read_tsv(file = "data/01_01CovidCases.tsv")
 data02 <- read_tsv(file = "data/01_02CovidDeaths.tsv")
 data03 <- read_tsv(file = "data/01_03Regions.tsv")
+
 data04 <- read_tsv(file = "data/01_04UrbanPop.tsv")
 data05 <- read_tsv(file = "data/01_05LifeExp.tsv")
 data06 <- read_tsv(file = "data/01_06Smoking.tsv")
@@ -70,6 +71,15 @@ data_gapminder_clean_x <- data04 %>%
   full_join(data21, by="country") %>% 
   rename('Country' = 'country')
 
+#It produces an error for the country variable, since a mean cannot be found
+for (i in colnames(data_gapminder_clean_x)) {
+  data_gapminder_clean_x[[i]] <- data_gapminder_clean_x[[i]] %>%
+  replace(is.na(.), 
+          mean(data_gapminder_clean_x[[i]], 
+               na.rm=TRUE))
+}
+
+
 #needs renaminc countries here
 
 data_clean <- data_covid_clean_y %>% 
@@ -79,4 +89,4 @@ data_clean <- data_covid_clean_y %>%
 
 # Write data --------------------------------------------------------------
 write_tsv(x = data_gapminder_clean_x,
-          file = "data/02_gapminder_clean_NA.tsv")
+          file = "data/02_gapminder_clean.tsv")
