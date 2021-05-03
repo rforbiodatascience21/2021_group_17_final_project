@@ -1,42 +1,93 @@
 # 2021_group_17
 Final project repository
 
-Idea 1:
+### How to edit file: 
+When work is in progress and its pushed, mark it like this:  
+\# Annette  
+y = work in progress  
+z = more work  
+\# Annette  
+
+
+
+## Idea 1:
 - x: Gapminder statistics
 - y: total cases / 100k people
-- y2: excess mortality / 100k people (2020 vs. 2019/2018/2017) -> find the data!
+- y2: total deaths / 100k people
+- y3: fatality rate
+- alternative y: excess mortality / 100k people (2020 vs. 2019/2018/2017) -> find the data!
 Two analysis for y and y2, then compare with with each other!
 - alternative y:  total cases/ 100k people / number of days since 10th case 
 
-Idea 2:
+## Idea 2:
 - x: Day (starting with the day of 10th infection)
 - y: total cases
 
-Gapminder statistics:
-- Urban population (% of total)
-- Life expenctancy (years)
-- Smoking adults
-- alcohol consumption
-- Body Mass Index, men
-- Body Mass Index, women
-- Blood pressure, men 
-- Blood pressure, women
-- Fat in blood, men
-- Fat in blood, women
-- Govt. health spending / person (US$)
-- Total health spending / person (US$)
-- Working hours per week
-- Democracy score
-- Corruption Perception index 
-- Percentage of women in parliaments
-- Income per person (GDP/capita, PPP inflation-adjusted)
-- At least basic sanitation, overall access (%)
-- Land area (sq. km) -> to calculate Population density
+## Raw data:
+
+### John Hopkins data
+- 01: time series covid19 confirmed
+- 02: time series covid19 deaths
+- 03: Population count (IUD)
+
+### Gapminder statistics
+https://www.gapminder.org/data/
+- 04: Urban population (% of total) - [2019] (https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS)
+- 05: Life expenctancy (years) - [2017] (http://gapm.io/ilex)
+- 06: Smoking adults - [2005] (https://www.who.int/gho/en/)
+- 07: alcohol consumption - [2008] (https://www.who.int/gho/en/)
+- 08: Body Mass Index, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 09: Body Mass Index, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 10: Blood pressure, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 11: Blood pressure, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 12: Fat in blood, men - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 13: Fat in blood, women - [2008] (https://www.imperial.ac.uk/school-public-health/epidemiology-and-biostatistics/)
+- 14: Govt. health spending / person (US$) - [2010] (https://www.who.int/data/gho)
+- 15: Total health spending / person (US$) - [2010] (https://www.who.int/data/gho)
+- 16: Working hours per week - [2015] - (https://ilostat.ilo.org/) #A lot of data is missing
+- 17: Democracy score - [2011] (https://www.systemicpeace.org/polityproject.html)
+- 18: Corruption Perception index - [2017] (https://www.transparency.org/en/cpi/2020/index/nzl) 
+- 19: Percentage of women in parliaments - [2020] (http://gapm.io/dwparl)
+- 20: Income per person (GDP/capita, PPP inflation-adjusted) - [2021] (https://www.gapminder.org/data/documentation/gd001/) #Projection
+- 21: At least basic sanitation, overall access (%) - [2017] (https://data.worldbank.org/indicator/SH.STA.SMSS.ZS) #2015?
+- 22: Land area (sq. km) -> to calculate Population density - [2018] (http://www.fao.org/home/en/)
 
 
-TO DO:
-- find interesting tables from gapminder
-- create y variable
-- join all the tables
-- Create new variables: Population density, Continent,
-- 
+## TO DO:
+
+Pre-work:
+- download the data from gapminder and upload it to the _raw
+- decide which year to take from each table and add the year to the README  
+
+01_load: 
+- load the raw dataframes
+- take the columns that we need
+- change column name to describe attribute
+- save each dataframe again (many files, with each having only two columns)  
+
+02_clean:
+- load all data frames
+- for the covid counts file: add up up the numbers, so that only one row for each country
+- join the dataframes according to country name
+- check that all countries are included (maybe countries are not having the same names)! (length of gapminder table == length of new table)
+- save cleaned dataframe (only one file)  
+
+03_augment:
+- load cleaned dataframe
+- create the additional attributes (total cases / 100k people, total deaths / 100k people, fatality rate, continent, population density)
+- save dataframe ready for analysis  
+
+04_analysis:
+- PCA
+- linear regression
+
+### Work split up until next monday:
+- Annette: 04-13, prework and 01_load
+- Matthias: 14-22, prework and 01_load
+- Thomas: 01_load and 02_clean for the covid data (datafiles 01,02,03)
+- Carlotta: finish 02_clean (merging all dataframes) or write draft for it, in case the files are not ready yet
+
+## Things to ask Leon:
+
+- Correlation problem? 
+- Final presentation: using premade tables?
