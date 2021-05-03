@@ -11,6 +11,9 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
+data01 <- read_tsv(file = "data/01_01CovidCases.tsv")
+data02 <- read_tsv(file = "data/01_02CovidDeaths.tsv")
+data03 <- read_tsv(file = "data/01_03Regions.tsv")
 data04 <- read_tsv(file = "data/01_04UrbanPop.tsv")
 data05 <- read_tsv(file = "data/01_05LifeExp.tsv")
 data06 <- read_tsv(file = "data/01_06Smoking.tsv")
@@ -32,6 +35,21 @@ data21 <- read_tsv(file = "data/01_21BasicSaniAcc.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
+
+#Countries separated by region (ex Australia) are summarized into one variable
+data01 <- data01 %>% 
+  group_by(Country) %>% 
+  summarise_all(sum)
+
+data02 <- data02 %>% 
+  group_by(Country) %>% 
+  summarise_all(sum)
+
+#Only keep total population of countries (eliminate reginal data)
+covid_data <- data01 %>% 
+  left_join(data02, x_names = Country) %>% 
+  left_join(data03, x_names = Country)
+
 data_clean_x <- data04 %>% 
   left_join(data05) %>% 
   left_join(data06) %>% 
@@ -50,9 +68,9 @@ data_clean_x <- data04 %>%
   left_join(data19) %>% 
   left_join(data20) %>% 
   left_join(data21) %>% 
-  left_join(data22) %>% 
+  left_join(data22)
 
 
 # Write data --------------------------------------------------------------
 #write_tsv(x = my_data_clean,
-          file = "data/02_my_data_clean.tsv")
+          #file = "data/02_my_data_clean.tsv")
