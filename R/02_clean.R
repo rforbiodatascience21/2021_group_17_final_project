@@ -17,7 +17,7 @@ data06 <- read_tsv(file = "data/01_06Smoking.tsv")
 data07 <- read_tsv(file = "data/01_07AlcConsump.tsv")
 data08 <- read_tsv(file = "data/01_08BMI_m.tsv")
 data09 <- read_tsv(file = "data/01_09BMI_f.tsv")
-data10 <- read_tsv(file = "data/01_11SBP_f.tsv"))
+data10 <- read_tsv(file = "data/01_11SBP_f.tsv")
 data11 <- read_tsv(file = "data/01_11SBP_f.tsv")
 data12 <- read_tsv(file = "data/01_12cholesterol_m.tsv")
 data13 <- read_tsv(file = "data/01_13cholesterol_f.tsv")
@@ -33,6 +33,7 @@ data21 <- read_tsv(file = "data/01_21BasicSaniAcc.tsv")
 
 # Wrangle data ------------------------------------------------------------
 data_clean_x <- data04 %>% 
+  left_join(data05) %>% 
   left_join(data06) %>% 
   left_join(data07) %>% 
   left_join(data08) %>% 
