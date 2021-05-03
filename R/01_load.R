@@ -15,7 +15,7 @@ cases_data_raw <- read_csv(file = "data/_raw/01_time_series_covid19_confirmed_gl
 deaths_data_raw <- read_csv(file = "data/_raw/02_time_series_covid19_deaths_global.csv")
 regions_data_raw <- read_csv(file = "data/_raw/03_UID_ISO_FIPS_LookUp_Table.csv")
 
-data04_raw <- read.csv(file = "data/_raw/04_urban_population_percent_of_total.csv")
+data04_raw <- read.csv2(file = "data/_raw/04_urban_population_percent_of_total.csv")
 data05_raw <- read.csv(file = "data/_raw/05_life_expectancy_years.csv")
 data06_raw <- read.csv(file = "data/_raw/06_smoking_adults_percent_of_population_over_age_15.csv")
 data07_raw <- read.csv(file = "data/_raw/07_alcohol_consumption_per_adult_15plus_litres.csv")
