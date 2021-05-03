@@ -33,7 +33,7 @@ data18_raw <- read.csv(file = "data/_raw/18_corruption_perception_index_cpi.csv"
 data19_raw <- read.csv(file = "data/_raw/19_wn_bothhouses_c.csv")
 data20_raw <- read.csv(file = "data/_raw/20_income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
 data21_raw <- read.csv(file = "data/_raw/21_at_least_basic_sanitation_overall_access_percent.csv")
-
+data22_raw <- read.csv(file = "data/_raw/22_data_regions.csv")
 
 # Wrangle data ------------------------------------------------------------
 #get number of cases/deaths from last day (29th of April)
@@ -104,7 +104,8 @@ data20_raw <- data20_raw  %>%
 data21_raw <- data21_raw  %>% 
   select(country, X2017) %>% 
   rename(BasicSaniAcc = X2017)
-
+data22_raw <- data22_raw  %>% 
+  select(country, continent)
 
 
 # Write data --------------------------------------------------------------
@@ -144,3 +145,5 @@ write_tsv(x = data20_raw,
           file = "data/01_20Income_pp.tsv")
 write_tsv(x = data21_raw, 
           file = "data/01_21BasicSaniAcc.tsv")
+write_tsv(x = data22_raw, 
+          file = "data/01_22DataRegions.tsv")
