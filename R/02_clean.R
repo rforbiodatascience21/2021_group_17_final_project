@@ -46,31 +46,37 @@ data02 <- data02 %>%
   summarise_all(sum)
 
 #Only keep total population of countries (eliminate reginal data)
-covid_data <- data01 %>% 
+data_covid_clean_y <- data01 %>% 
   left_join(data02, x_names = Country) %>% 
   left_join(data03, x_names = Country)
 
-data_clean_x <- data04 %>% 
-  left_join(data05) %>% 
-  left_join(data06) %>% 
-  left_join(data07) %>% 
-  left_join(data08) %>% 
-  left_join(data09) %>% 
-  left_join(data10) %>% 
-  left_join(data11) %>%
-  left_join(data12) %>% 
-  left_join(data13) %>% 
-  left_join(data14) %>% 
-  left_join(data15) %>% 
-  left_join(data16) %>% 
-  left_join(data17) %>% 
-  left_join(data18) %>% 
-  left_join(data19) %>% 
-  left_join(data20) %>% 
-  left_join(data21) %>% 
-  left_join(data22)
+data_gapminder_clean_x <- data04 %>% 
+  full_join(data05, by="country") %>% 
+  full_join(data06, by="country") %>% 
+  full_join(data07, by="country") %>% 
+  full_join(data08, by="country") %>% 
+  full_join(data09, by="country") %>% 
+  full_join(data10, by="country") %>% 
+  full_join(data11, by="country") %>%
+  full_join(data12, by="country") %>% 
+  full_join(data13, by="country") %>% 
+  full_join(data14, by="country") %>% 
+  full_join(data15, by="country") %>% 
+  full_join(data16, by="country") %>% 
+  full_join(data17, by="country") %>% 
+  full_join(data18, by="country") %>% 
+  full_join(data19, by="country") %>% 
+  full_join(data20, by="country") %>% 
+  full_join(data21, by="country") %>% 
+  rename('Country' = 'country')
+
+#needs renaminc countries here
+
+data_clean <- data_covid_clean_y %>% 
+  full_join(data_gapminder_clean_x, by="Country")
+
 
 
 # Write data --------------------------------------------------------------
-#write_tsv(x = my_data_clean,
-          #file = "data/02_my_data_clean.tsv")
+write_tsv(x = data_gapminder_clean_x,
+          file = "data/02_gapminder_clean_NA.tsv")
