@@ -69,26 +69,36 @@ Pre-work:
 - load all data frames
 - for the covid counts file: add up up the numbers, so that only one row for each country
 - join the dataframes according to country name
-- check that all countries are included (maybe countries are not having the same names)! (length of gapminder table == length of new table)
+- check that all countries are included 
 - save cleaned dataframe (only one file)  
 
 03_augment:
 - load cleaned dataframe
-- create the additional attributes (total cases / 100k people, total deaths / 100k people, fatality rate, continent, population density)
+- create the additional attributes (total cases/100k people, total deaths/100k people, fatality rate, population density, additional categories (f.ex. BMI))
 - save dataframe ready for analysis  
 
 04_analysis:
 - PCA
 - linear regression
 
-### Work split up until next monday:
-- Annette: 04-13, prework and 01_load
-- Matthias: 14-22, prework and 01_load
-- Thomas: 01_load and 02_clean for the covid data (datafiles 01,02,03)
-- Carlotta: finish 02_clean (merging all dataframes) or write draft for it, in case the files are not ready yet
+### Work split up until next Wednesday kl 20.00 :
+
+- gapminder data (04-21):
+  - fix data 04, read from the .xlsx file downloaded from gapminder (**Mathias**)
+  - full join (**Mathias**)
+  - Fix N/A, take the mean (most basic method, because focus is on the process raw data to analysis data) (**Mathias**)
+  - change the country names to fit the covid count data (**Annette**)
+- continent data (22):
+  - change the country names to fit the covid count data (**Annette**)
+- covid data (01-02):
+  - aggregate the region data to one country (**Thomas**)
+- Population data (03):
+  - remove the regions (**Thomas**)
+- Join all data together (01-22) (**Thomas**)
+- Create new attributes in 03_augment (**Carlota**)
+
 
 ## Things to ask Leon:
 
-- Correlation problem? 
 - Final presentation: using premade tables?
 - Should we use stringr, to solve issues where the country names are different?
