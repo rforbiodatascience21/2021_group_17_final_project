@@ -51,6 +51,8 @@ data_covid_clean_y <- data01 %>%
   left_join(data02, x_names = Country) %>% 
   left_join(data03, x_names = Country)
 
+#Joining the Gapminder data with full-join
+#NAs are replaced with the mean of the variable
 data_gapminder_clean_x <- data04 %>% 
   full_join(data05, by="country") %>% 
   full_join(data06, by="country") %>% 
@@ -69,19 +71,17 @@ data_gapminder_clean_x <- data04 %>%
   full_join(data19, by="country") %>% 
   full_join(data20, by="country") %>% 
   full_join(data21, by="country") %>% 
-  rename('Country' = 'country')
-
-#It produces an error for the country variable, since a mean cannot be found
-for (i in colnames(data_gapminder_clean_x)) {
-  data_gapminder_clean_x[[i]] <- data_gapminder_clean_x[[i]] %>%
-  replace(is.na(.), 
-          mean(data_gapminder_clean_x[[i]], 
-               na.rm=TRUE))
-}
+  rename('Country' = 'country') %>% 
+  mutate_if(is_numeric,
+            function(x)
+            {replace_na(x, 
+                        mean(x,
+                              na.rm=TRUE))
+              }
+            )
 
 
 #needs renaminc countries here
-
 data_clean <- data_covid_clean_y %>% 
   full_join(data_gapminder_clean_x, by="Country")
 
