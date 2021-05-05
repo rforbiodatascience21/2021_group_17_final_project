@@ -102,3 +102,4 @@ Pre-work:
 
 - Final presentation: using premade tables?
 - Should we use stringr, to solve issues where the country names are different?
+- first augment, then handling the NAs?
