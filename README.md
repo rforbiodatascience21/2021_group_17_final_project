@@ -81,25 +81,21 @@ Pre-work:
 - PCA
 - linear regression
 
-### Work split up until next Wednesday kl 20.00 :
+### Work split up until Sunday 12:00
 
-- gapminder data (04-21):
-  - fix data 04, read from the .xlsx file downloaded from gapminder (**Mathias**)
-  - full join (**Mathias**)
-  - Fix N/A, take the mean (most basic method, because focus is on the process raw data to analysis data) (**Mathias**)
-  - change the country names to fit the covid count data (**Annette**)
-- continent data (22):
-  - change the country names to fit the covid count data (**Annette**)
-- covid data (01-02):
-  - aggregate the region data to one country (**Thomas**)
-- Population data (03):
-  - remove the regions (**Thomas**)
-- Join all data together (01-22) (**Thomas**)
+- write down which countries are not included in our analysis (**Annette**)
 - Create new attributes in 03_augment (**Carlota**)
+  - create a second data set with cumputed missing values (**Carlota**)
+- Visualization plots (**Carlotta**) (**Mathias**)
+- PCA (**Annette**)
+- linear regression, if too complicated do visualization (**Thomas**)
+- rewrite the loading of data using purrr (**Mathias**)
+- look into how to write the report using R markdown (**Thomas**)
 
 
 ## Things to ask Leon:
 
-- Final presentation: using premade tables?
-- Should we use stringr, to solve issues where the country names are different?
+- final presentation: using premade tables?
 - first augment, then handling the NAs?
+- when is the hand-in on monday?
+- 
