@@ -18,7 +18,21 @@ data_clean <- read_tsv(file = "data/02_data_clean.tsv")
 data_clean_aug <- data_clean %>% mutate(Casesper100kpp = round((Cases / Population * 100000), digits = 2)) %>% 
   mutate(Deathsper100kpp = round((Deaths / Population * 100000), digits = 2)) %>%
   mutate(FatalityRate = round((Deaths / Cases * 100), digits = 2)) %>%
-  mutate(PopDens)
+  mutate(BMI_m_class = case_when(BMI_m < 18.5 ~ "underweight",
+                               18.5 <= BMI_m & BMI_m < 24.9 ~ "normal weight",
+                               24.9 <= BMI_m & BMI_m < 29.9 ~ "overweight",
+                               29.9 <= BMI_m & BMI_m < 35 ~ "obese",
+                               35 <= BMI_m & BMI_m < 40 ~ "severe obesity",
+                               40 <= BMI_m & BMI_m < 50 ~ "morbid obesity",
+                               50 <= BMI_m ~ "super obese" )) %>%
+  mutate(BMI_f_class = case_when(BMI_f < 18.5 ~ "underweight",
+                               18.5 <= BMI_f & BMI_f < 24.9 ~ "normal weight",
+                               24.9 <= BMI_f & BMI_f < 29.9 ~ "overweight",
+                               29.9 <= BMI_f & BMI_f < 35 ~ "obese",
+                               35 <= BMI_f & BMI_f < 40 ~ "severe obesity",
+                               40 <= BMI_f & BMI_f < 50 ~ "morbid obesity",
+                               50 <= BMI_f ~ "super obese" ))
+
 
 
 
