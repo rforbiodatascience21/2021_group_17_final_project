@@ -20,6 +20,8 @@ data_clean_aug <- data_clean %>%
   mutate(Deathsper100kpp = round((Deaths / Population * 100000), digits = 2)) %>%
   mutate(FatalityRate = round((Deaths / Cases * 100), digits = 2)) %>%
   mutate(PopDens = round(Population/LandSqkm,digits = 2)) %>%
+  mutate(Fatality_class = case_when(FatalityRate < mean(FatalityRate) ~ "low fatality",
+                                    FatalityRate > mean(FatalityRate) ~ "high fatality")) %>%
   mutate(BMI_m_class = case_when(BMI_m < 18.5 ~ "underweight",
                                18.5 <= BMI_m & BMI_m < 24.9 ~ "normal weight",
                                24.9 <= BMI_m & BMI_m < 29.9 ~ "overweight",
