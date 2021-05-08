@@ -51,6 +51,7 @@ https://www.gapminder.org/data/
 - 20: Income per person (GDP/capita, PPP inflation-adjusted) - [2021] (https://www.gapminder.org/data/documentation/gd001/) #Projection
 - 21: At least basic sanitation, overall access (%) - [2017] (https://data.worldbank.org/indicator/SH.STA.SMSS.ZS) #2015?
 - 22: Dictionary of countries and continents - (https://github.com/vincentarelbundock/countrycode/blob/main/dictionary/data_regions.csv)
+- 23: Data on testing for COVID-19 by week and country - (https://www.ecdc.europa.eu/en/publications-data/covid-19-testing)
 
 
 ## TO DO:

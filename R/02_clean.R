@@ -116,6 +116,15 @@ data_continent <- my_data %>%
                              TRUE ~ country)) %>% 
          rename(Country = country)
 
+#EU testing - Currently not used
+EU_testing <- my_data %>%
+  pluck(23) %>% 
+  filter(level == "national") %>% 
+  select("country", "tests_done") %>% 
+  group_by(country) %>% 
+  summarise_all(sum)
+
+
 # Full join, to see which countries are excluded in our analysis
 data_full <- data_covid %>% 
   full_join(data_continent, by="Country") %>% 
