@@ -11,72 +11,57 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-data01 <- read_tsv(file = "data/01_01CovidCases.tsv")
-data02 <- read_tsv(file = "data/01_02CovidDeaths.tsv")
-data03 <- read_tsv(file = "data/01_03Regions.tsv")
-data04 <- read_tsv(file = "data/01_04UrbanPop.tsv")
-data05 <- read_tsv(file = "data/01_05LifeExp.tsv")
-data06 <- read_tsv(file = "data/01_06Smoking.tsv")
-data07 <- read_tsv(file = "data/01_07AlcConsump.tsv")
-data08 <- read_tsv(file = "data/01_08BMI_m.tsv")
-data09 <- read_tsv(file = "data/01_09BMI_f.tsv")
-data10 <- read_tsv(file = "data/01_11SBP_f.tsv")
-data11 <- read_tsv(file = "data/01_11SBP_f.tsv")
-data12 <- read_tsv(file = "data/01_12cholesterol_m.tsv")
-data13 <- read_tsv(file = "data/01_13cholesterol_f.tsv")
-data14 <- read_tsv(file = "data/01_14GovtHealthUSD_pp.tsv")
-data15 <- read_tsv(file = "data/01_15TotHealthUSD_pp.tsv")
-data16 <- read_tsv(file = "data/01_16LandSqkm.tsv")
-data17 <- read_tsv(file = "data/01_17DemScore.tsv")
-data18 <- read_tsv(file = "data/01_18CPI.tsv")
-data19 <- read_tsv(file = "data/01_19WomanInParlia.tsv")
-data20 <- read_tsv(file = "data/01_20Income_pp.tsv")
-data21 <- read_tsv(file = "data/01_21BasicSaniAcc.tsv")
-data22 <- read_tsv(file = "data/01_22DataRegions.tsv")
+
+#Make list of input files
+my_files = list.files(path = "/cloud/project/data",
+                      pattern = "^01_.+\\.tsv$")
+
+#The working directory is changed to retrieve the data
+setwd("/cloud/project/data")
+
+#Read in data as tsv
+my_data = map(my_files, read_tsv)
+
+setwd("/cloud/project")
 
 # Wrangle data ------------------------------------------------------------
 
 #Countries separated by region (ex Australia) are summarized into one variable
-data01 <- data01 %>% 
+data01 <- my_data %>%
+  pluck(1) %>% 
   group_by(Country) %>% 
   summarise_all(sum)
 
-data02 <- data02 %>% 
+data02 <- my_data %>% 
+  pluck(2) %>% 
   group_by(Country) %>% 
   summarise_all(sum)
+
+data03 <- my_data %>% 
+  pluck(3)
 
 #Only keep total population of countries (eliminate reginal data)
 data_covid <- data01 %>% 
   left_join(data02, by="Country") %>% 
   left_join(data03, by="Country")
 
-#Joining the Gapminder data with full-join
-#NAs are replaced with the mean of the variable
-data_gapminder <- data04 %>% 
-  full_join(data05, by="country") %>% 
-  full_join(data06, by="country") %>% 
-  full_join(data07, by="country") %>% 
-  full_join(data08, by="country") %>% 
-  full_join(data09, by="country") %>% 
-  full_join(data10, by="country") %>% 
-  full_join(data11, by="country") %>%
-  full_join(data12, by="country") %>% 
-  full_join(data13, by="country") %>% 
-  full_join(data14, by="country") %>% 
-  full_join(data15, by="country") %>% 
-  full_join(data16, by="country") %>% 
-  full_join(data17, by="country") %>% 
-  full_join(data18, by="country") %>% 
-  full_join(data19, by="country") %>% 
-  full_join(data20, by="country") %>% 
-  full_join(data21, by="country") %>% 
+
+#Full join gapminder data by country
+data_gapminder <- my_data[4:21] %>% 
+  reduce(full_join, 
+         by="country")
+
+#Replace NAs with mean
+data_gapminder <- data_gapminder %>% 
   mutate_if(is_numeric,
             function(x)
             {replace_na(x, 
                         mean(x,
-                              na.rm=TRUE))
-              }
-            ) %>%
+                             na.rm=TRUE))
+            })
+
+#Fix names, so they are in agreement with data_covid
+data_gapminder <- data_gapminder %>% 
   mutate(country = case_when(country == "Myanmar" ~ "Burma",
                              country == "Cape Verde" ~ "Cabo Verde",
                              country == "Congo, Rep." ~ "Congo (Brazzaville)",
@@ -99,7 +84,8 @@ data_gapminder <- data04 %>%
 
 
 # To join all data together the countries variable has to be spelled the same way in every dataframe
-data_continent <- data22 %>% 
+data_continent <- my_data %>% 
+  pluck(22) %>% 
   mutate(country = case_when(country == "Congo" ~ "Congo (Brazzaville)",
                              country == "Côte D'Ivoire" ~ "Cote d'Ivoire",
                              country == "Democratic Republic of the Congo" ~ "Congo (Kinshasa)",
