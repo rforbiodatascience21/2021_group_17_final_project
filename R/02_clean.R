@@ -40,7 +40,7 @@ data02 <- my_data %>%
 data03 <- my_data %>% 
   pluck(3)
 
-#Only keep total population of countries (eliminate reginal data)
+#Only keep total population of countries (eliminate regional data)
 data_covid <- data01 %>% 
   left_join(data02, by="Country") %>% 
   left_join(data03, by="Country")

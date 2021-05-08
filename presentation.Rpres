@@ -1,42 +1,170 @@
 Group 17 - *Project Title*
 ========================================================
-author: Annette, Carlota, Mathias, Thomas
-date: 10th May 2021
 autosize: true
+
+<br/> <ADD FULL NAME AND STUDENT NUMBER>
+Annette  
+Carlota  
+Mathias  
+Thomas Carvalho Andersen, s202755
+
+10th May 2021
+
+***
+<br/>
+### add cool plot and/or DTU logo here
 
 Data Description
 ========================================================
+autosize: true
 
-For more details on authoring R presentations please visit
-<https://support.rstudio.com/hc/en-us/articles/200486468>.
+<add short description of what we try to accomplish here>
+<br/>
+We merged data from two main sources: John Hopkins and Gapminder.
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+This is a new sentence describing some more of what we did.
+
+### maybe add some figure here
+
+***
+
+## Data sources:<br/><br/>
+### John Hopkins data - [Repository Link](https://github.com/CSSEGISandData/COVID-19)
+- Time series of Covid19 confirmed cases
+- Time series of Covid19 deaths
+- Population count (IUD)
+
+
+### Gapminder data - [Website Link](https://www.gapminder.org/data/)
+- 18 datasets of varying relevance including:  
+  - Life expectancy
+  - Smoking and Alcohol Consumption
+  - Body Mass Index
+  - Basic Sanitation
+
 
 Loading Data
 ========================================================
+left: 50% <used for adjusting column spaces>
 
+*talk about the different steps of loading data with code examples*
+
+Example 1
 ```{r}
 summary(cars)
 ```
 
+***
+
+*other text here*  
+<br/><br/>
+Example 2
+```{r}
+summary(cars)
+```
+
+
 Cleaning Data
 ========================================================
+left: 50% <used for adjusting column spaces>
+
+*different steps of cleaning data with code examples*
+
+Example 1
+```{r}
+summary(cars)
+```
+
+***
+
+*other text here*  
+
+Example 2
+```{r}
+summary(cars)
+```
 
 
 Augmenting Data
 ========================================================
+left: 50% <used for adjusting column spaces>
+
+*different steps of augmenting data with code examples*
+
+Example 1
+```{r}
+summary(cars)
+```
+
+***
+
+*other text here*  
+
+Example 2
+```{r}
+summary(cars)
+```
 
 
 Analysis
 ========================================================
+left: 50% <used for adjusting column spaces>
 
+*description of analysis steps with some code and maybe a plot*
 
-Plots
-========================================================
+Example  
+```{r}
+summary(cars)
+```
 
+***
+
+*other text here*  
+
+Plot  
 ```{r, echo=FALSE}
 plot(cars)
 ```
 
+
+Plots
+========================================================
+left: 50% <used for adjusting column spaces>
+
+*Plots we might want to show*
+
+### Plot 1  
+```{r, echo=FALSE}
+plot(cars)
+```
+
+***
+
+### Plot 2  
+```{r, echo=FALSE}
+plot(cars)
+```
+
+
+More Plots
+========================================================
+left: 50% <used for adjusting column spaces>
+
+*More plots we might want to show*
+
+### Plot 1  
+```{r, echo=FALSE}
+plot(cars)
+```
+
+***
+
+### Plot 2  
+```{r, echo=FALSE}
+plot(cars)
+```
+
+
+Conclusion (is this slide needed?)
+========================================================
+### Any conclusion we might want to make
