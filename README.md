@@ -90,11 +90,15 @@ Pre-work:
 - Create new attributes in 03_augment (**Carlota**)
   - create a second data set with cumputed missing values (**Carlota**)
 - Visualization plots (**Carlotta**) (**Mathias**)
-- PCA (**Annette**)
-- linear regression, if too complicated do visualization (**Thomas**)
 - rewrite the loading of data using purrr (**Mathias**)
 - look into how to write the report using R markdown (**Thomas**)
 
+
+### Work split up until Monday (10-05-2021)
+- PCA (**Thomas**)
+- linear regression, if too complicated do visualization (**Annette**)
+- Preparing the presentation and add plots (save them) (**Carlota**)
+- Augment the Covid-19 testing dataset, and create framework for second analysis (**Mathias**)
 
 ## Things to ask Leon:
 
