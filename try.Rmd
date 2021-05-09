@@ -1,0 +1,62 @@
+---
+title: "COVID-19 around the world"
+author:
+ - name: "Annette Lien (s202633)"
+ - name: "Carlota Carbajo Moral (s202424)"
+ - name: "Mathias Fynbo Jensen (s192065)"
+ - name: "Thomas Carvalho Andersen (s202755)"
+date: "10/5/2021"
+output: 
+  ioslides_presentation:
+    logo: presentation-figure/dtu-logo-png-transparent.png
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Index
+
+- Main idea
+- Data loading
+- Data cleaning
+- Data augmentation
+- Data anlysis
+- Conclusion
+
+## Main idea
+
+For this project we merged data from two main sources: John Hopkins and Gapminder.
+
+<div class="columns-2">
+### John Hopkins data - [Repository Link](https://github.com/CSSEGISandData/COVID-19)
+
+- Main datasets of the project
+  - Time series of COVID-19 confirmed cases
+  - Time series of COVID-19 deaths
+  - Population count (IUD)
+  
+
+
+### Gapminder data - [Website Link](https://www.gapminder.org/data/)
+
+- 18 datasets of varying relevance including:  
+  - Life expectancy
+  - Smoking and Alcohol Consumption
+  - Body Mass Index and Basic Sanitation
+
+</div>
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
