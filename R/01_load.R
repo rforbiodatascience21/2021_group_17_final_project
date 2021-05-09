@@ -34,6 +34,7 @@ data20_raw <- read.csv(file = "data/_raw/20_income_per_person_gdppercapita_ppp_i
 data21_raw <- read.csv(file = "data/_raw/21_at_least_basic_sanitation_overall_access_percent.csv")
 data22_raw <- read.csv(file = "data/_raw/22_data_regions.csv")
 data23_raw <- read.csv(file = "data/_raw/23_EU_testing.csv")
+data24_raw <- read.csv(file = "data/_raw/24_covid-testing-all-observations.csv.gz")
 
 # Wrangle data ------------------------------------------------------------
 #get number of cases/deaths from last day (29th of April)
@@ -110,7 +111,9 @@ data22_raw <- data22_raw  %>%
   select(country, continent)
 data23_raw <- data23_raw  %>% 
   select("country", "level", "tests_done")
-
+data24_raw <- data24_raw %>% 
+  select("Entity", "Date", "Cumulative.total", "Daily.change.in.cumulative.total") %>% 
+  rename(CumulativeTesting = Cumulative.total)
 
 # Write data --------------------------------------------------------------
 
@@ -160,3 +163,5 @@ write_tsv(x = data22_raw,
           file = "data/01_22DataRegions.tsv")
 write_tsv(x = data23_raw, 
           file = "data/01_23EUTesting.tsv")
+write_tsv(x = data24_raw, 
+          file = "data/01_24AllTesting.tsv")

@@ -120,9 +120,30 @@ data_continent <- my_data %>%
 EU_testing <- my_data %>%
   pluck(23) %>% 
   filter(level == "national") %>% 
-  select("country", "tests_done") %>% 
+  select("country", 
+         "tests_done") %>% 
   group_by(country) %>% 
   summarise_all(sum)
+
+
+#All testing - Currently not used
+all_testing <- my_data %>%
+  pluck(24)
+
+all_testing <- all_testing %>% 
+  separate("Entity",
+           c("Country", "TestUnit"),
+           sep = " - ") %>%
+  filter(TestUnit != "units unclear") %>% 
+  filter(str_detect(Date, 
+                    "^2021-04-"))%>% 
+  group_by(Country) %>% 
+  select("Country",
+         "CumulativeTesting") %>% 
+  top_n(n=1) %>% 
+  mutate(Country = case_when(Country == "South Korea" ~ "Korea, South",
+                             Country == "United States" ~ "US",
+                             TRUE ~ Country))
 
 
 # Full join, to see which countries are excluded in our analysis
@@ -134,6 +155,19 @@ data_full <- data_covid %>%
 data_clean <- data_full %>% 
   drop_na()
 
+# Full join, to see which countries are excluded in our analysis
+data_full_testing <- data_covid %>% 
+  full_join(data_continent, by="Country") %>% 
+  full_join(data_gapminder, by="Country") %>% 
+  full_join(all_testing, by="Country")
+
+# Drop all countries with NA values to get the clean data set
+data_testing_clean <- data_full_testing %>% 
+  drop_na()
+
 # Write data --------------------------------------------------------------
 write_tsv(x = data_clean,
           file = "data/02_data_clean.tsv")
+
+write_tsv(x = data_testing_clean,
+          file = "data/02_data_testing_clean.tsv")
