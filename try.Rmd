@@ -18,11 +18,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Index
 
-- Main idea
+- Data description
 - Data loading
 - Data cleaning
 - Data augmentation
-- Data anlysis
+- Data analysis
 - Conclusion
 
 ## Main idea
@@ -48,12 +48,80 @@ For this project we merged data from two main sources: John Hopkins and Gapminde
 
 </div>
 
-## Slide with R Output
+## Data loading
 
-```{r cars, echo = TRUE}
-summary(cars)
+```{r, message = FALSE, results='hide'}
+library("tidyverse")
+
 ```
 
+
+```{r, echo = TRUE, message = FALSE, results = 'hide'}
+data01_raw <- read_csv(file = "data/_raw/01_time_series_covid19_confirmed_global.csv")
+
+```
+```{r, echo = TRUE}
+data01_raw
+```
+
+## Data loading
+Similar procedure for datasets 01 to 03.
+```{r , echo = TRUE}
+data01_raw <- data01_raw %>%
+  select('Country/Region', '4/29/21') %>% 
+  rename('Cases' = '4/29/21') %>% 
+  rename('Country' = 'Country/Region')
+data01_raw
+
+```
+
+## Data loading
+Similar procedure for datasets 04 to 24.
+```{r, echo = TRUE}
+data04_raw <- data04_raw  %>% 
+  select(country, X2019) %>% 
+  rename(UrbanPop = X2019)
+data05_raw <- data05_raw  %>% 
+  select(country, X2017) %>% 
+  rename(LifeExp = X2017)
+data06_raw <- data06_raw  %>% 
+  select(country, X2005) %>% 
+  rename(Smoking = X2005)
+data04_raw
+```
+
+## Data cleaning
+Similar procedure for datasets 01 to 03.
+```{r, echo=TRUE}
+data01 <- my_data %>%
+  pluck(1) %>% 
+  group_by(Country) %>% 
+  summarise_all(sum)
+data01
+```
+
+## Data cleaning
+```{r, echo = TRUE}
+data_covid <- data01 %>% 
+  left_join(data02, by="Country") %>% 
+  left_join(data03, by="Country")
+
+
+data_gapminder <- my_data[4:21] %>% 
+  reduce(full_join, 
+         by="country")
+
+data_gapminder <- data_gapminder %>% 
+  mutate_if(is_numeric,
+            function(x)
+            {replace_na(x, 
+                        mean(x,
+                             na.rm=TRUE))
+            })
+```
+
+## Data cleaning
+Before the final join some of the names had to be fixed so both data_covid and data_gapminder agreed in the country names.
 ## Slide with Plot
 
 ```{r pressure}
