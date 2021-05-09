@@ -151,17 +151,15 @@ data_full <- data_covid %>%
   full_join(data_continent, by="Country") %>% 
   full_join(data_gapminder, by="Country")
 
-# Drop all countries with NA values to get the clean data set
-data_clean <- data_full %>% 
-  drop_na()
-
-# Full join, to see which countries are excluded in our analysis
 data_full_testing <- data_covid %>% 
   full_join(data_continent, by="Country") %>% 
   full_join(data_gapminder, by="Country") %>% 
   full_join(all_testing, by="Country")
 
 # Drop all countries with NA values to get the clean data set
+data_clean <- data_full %>% 
+  drop_na()
+
 data_testing_clean <- data_full_testing %>% 
   drop_na()
 
