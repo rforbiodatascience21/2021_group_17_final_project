@@ -59,15 +59,15 @@ results_anova <- data_nested %>%
   select(y_names, anv) %>% 
   mutate(anv = map(anv, ~cbind(variable = rownames(.x), .x))) %>% 
   unnest(anv) %>% 
-  rename("anv_pvalue" = "Pr(>F)") %>%
-  filter(anv_pvalue <= 0.05)
+  rename("pvalue" = "Pr(>F)") %>%
+  filter(pvalue <= 0.05) %>% 
+  select(y_names, variable, pvalue) %>% 
+  pivot_wider(names_from = y_names, values_from = pvalue)
 
-results_model <- data_nested %>% 
+results_estimates <- data_nested %>% 
   select(y_names, mdl_tidy) %>% 
   unnest(mdl_tidy) %>% 
-  left_join(results_anova, by = "y_names") %>% 
-  filter(str_detect(term, variable)) %>% 
-  select(y_names, term, p.value, estimate, conf.low, conf.high, variable, anv_pvalue)
+  select(y_names, term, estimate, std.error, conf.low, conf.high)
 
 
 # Visualize data ----------------------------------------------------------
