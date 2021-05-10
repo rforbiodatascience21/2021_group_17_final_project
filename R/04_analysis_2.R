@@ -49,17 +49,25 @@ pl2 <- data_clean_testing_aug %>%
         axis.text.y = element_text(size = 8))
 pl1 + pl2
 
+ggsave("Boxplot_CumulativeTesting_Continent.png", 
+       path = "results/",
+       plot = pl1)
+
+ggsave("Boxplot_PositiveRate_Continent.png", 
+       path = "results/",
+       plot = pl2)
 # Linear regression
 
 # Without fill=continent the linear regression is clearer.
 
 data_clean_testing_aug %>% 
-  ggplot(mapping = aes(x= Tests_pp, 
+  ggplot(mapping = aes(x = Tests_pp, 
                        y = Casesper100kpp)) + 
   facet_wrap(~continent)+ # We can use this or not
   labs(x = "Cumulative tests per person",
        y = "Number of cases per 100k inhabitants")+
-  geom_smooth(method = lm) +
+  geom_smooth(method = lm,
+              fullrange = TRUE) +
   geom_point()+
   theme(legend.position = "bottom")
 
@@ -95,13 +103,26 @@ data_clean_testing_aug %>%
        y = "Density")
 
 
-# 10 countries with highest Fatality rate
+# 10 countries with highest Positive Rate
 data_clean_testing_aug %>%
   slice_max(order_by = PositiveRate,
             n=10)%>% 
   mutate(Country = fct_reorder(Country, 
                                PositiveRate,
                                .desc = FALSE)) %>% 
+  ggplot(mapping = aes(x = Country,
+                       y = PositiveRate,
+                       fill = continent)) + 
+  coord_flip() +
+  geom_bar(stat="Identity")
+
+# 10 countries with lowest Positive Rate
+data_clean_testing_aug %>%
+  slice_min(order_by = PositiveRate,
+            n=10)%>% 
+  mutate(Country = fct_reorder(Country, 
+                               PositiveRate,
+                               .desc = TRUE)) %>% 
   ggplot(mapping = aes(x = Country,
                        y = PositiveRate,
                        fill = continent)) + 
