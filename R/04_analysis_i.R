@@ -34,58 +34,54 @@ data_numeric <- analysis_1_clean_aug  %>%
 # Model data -------------------------------------------------------------
 
 #PCA fit of Cases
-pca_fit_cases <- data_numeric %>% 
-  select(-Cases) %>% 
-  prcomp(scale. = TRUE)
-
-#PCA fit of Deaths
-pca_fit_deaths <- data_numeric %>% 
-  select(-Deaths) %>% 
-  prcomp(scale. = TRUE)
-
-#PCA fit of Fatality Rate
-pca_fit_FR <- data_numeric %>% 
+pca_fit <- data_numeric %>% 
+  select(-Cases) %>%
+  select(-Casesper100kpp) %>%
+  select(-Deaths) %>%
+  select(-Deathsper100kpp) %>%
   select(-FatalityRate) %>% 
   prcomp(scale. = TRUE)
+
 
 # Visualise data ----------------------------------------------------------
 
 #PCA plot for Cases
-plot1 <- pca_fit_cases %>% 
+plot1_pca <- pca_fit %>% 
   augment(data_numeric) %>% 
-  mutate(Cases = log(Cases)) %>% 
   ggplot(aes(.fittedPC1, 
              .fittedPC2, 
-             color = Cases)) +
+             color = Casesper100kpp)) +
   scale_color_viridis(option = 'C',
-                      name = 'log(Cases)') +
+                      name = 'Cases per 100k people') +
   geom_point(size = 2) +
   theme(legend.position = "bottom",
         legend.key.width = unit(1.5, 
                                 "cm")) +
   labs(x = 'PC1',
-       y = 'PC2')
+       y = 'PC2',
+       title = "PCA Cases per 100k inhabitants")
+plot1_pca
 
 #PCA plot for Deaths
-plot2 <- pca_fit_deaths %>% 
+plot2_pca <- pca_fit %>% 
   augment(data_numeric) %>% 
-  mutate(Deaths = log(Deaths)) %>% 
   ggplot(aes(.fittedPC1, 
              .fittedPC2, 
-             color = Deaths)) +
+             color = Deathsper100kpp)) +
   scale_color_viridis(option = 'C',
-                      name = 'log(Deaths)') +
+                      name = 'Deaths per 100k people') +
   geom_point(size = 2) +
   theme(legend.position = "bottom",
         legend.key.width = unit(1.5, 
                                 "cm")) +
   labs(x = 'PC1',
-       y = 'PC2')
+       y = 'PC2',
+       title = "PCA Deaths per 100k inhabitants")
+plot2_pca
 
 #PCA plot for Fatality Rate
-plot3 <- pca_fit_FR %>% 
+plot3_pca <- pca_fit %>% 
   augment(data_numeric) %>% 
-  mutate(FatalityRate = log(FatalityRate)) %>% 
   ggplot(aes(.fittedPC1, 
              .fittedPC2, 
              color = FatalityRate)) +
@@ -96,9 +92,15 @@ plot3 <- pca_fit_FR %>%
         legend.key.width = unit(1.5, 
                                 "cm")) +
   labs(x = 'PC1',
-       y = 'PC2')
+       y = 'PC2',
+       title = "PCA Fatality rate")
+plot3_pca
 
-plot1 + plot2 + plot3
+plot1_pca / plot2_pca 
+
+ggsave("PCA_first_analysis.png", 
+       path = "results/",
+       plot = (plot1_pca / plot2_pca ),width = 15, height = 10)
 
 # Box plots of cases per 100k pp, deaths per 100k pp and fatality rate for each continent.
 pl1 <- analysis_1_clean_aug %>% 
