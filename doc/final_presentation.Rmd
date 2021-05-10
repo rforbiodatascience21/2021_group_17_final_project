@@ -140,32 +140,32 @@ data_clean_aug
 ```
 
 ## Data visualization
-![](../results/Boxplot_first_analysis.png)
+![](../results/Boxplot_first_analysis.png){height=500}
 
 
 
 
 ## Data visualization
 
-![](../results/Scatterplot_smoking_all.png){height=400}
+![](../results/Scatterplot_smoking_all.png){height=500}
 
 
 
 ## Data visualization
 
-![](../results/Scatterplot_smoking_continent.png){height=400}
+![](../results/Scatterplot_smoking_continent.png){height=500}
 
 ## Data visualization
 
-![](../results/Scatterplot_saniacc_all.png){height=400}
+![](../results/Scatterplot_saniacc_all.png){height=500}
 
 ## Data visualization
 
-![](../results/Densityplot_continent.png){height=400}
+![](../results/Densityplot_continent.png){height=500}
 
 ## Data visualization
 
-![](../results/Fatalityrate_europe.png){height=400}
+![](../results/Fatalityrate_europe.png){height=500}
 
 ## PCA
 ![](../results/PCA_first_analysis.png){height=500}
