@@ -9,10 +9,6 @@ library("broom")
 library("car")
 
 
-# Define functions --------------------------------------------------------
-source(file = "R/99_project_functions.R")
-
-
 # Load data ---------------------------------------------------------------
 data1 <- read_tsv(file = "data/03_analysis_1_clean_aug.tsv")
 data2 <- read_tsv(file = "data/03_analysis_2_clean_aug.tsv")
