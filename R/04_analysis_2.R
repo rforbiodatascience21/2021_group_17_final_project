@@ -7,10 +7,6 @@ library("tidyverse")
 library("patchwork")
 
 
-# Define functions --------------------------------------------------------
-source(file = "R/99_project_functions.R")
-
-
 # Load data ---------------------------------------------------------------
 analysis_2_clean_aug <- read_tsv(file = "data/03_analysis_2_clean_aug.tsv")
 
