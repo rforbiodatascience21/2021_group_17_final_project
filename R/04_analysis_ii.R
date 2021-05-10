@@ -34,6 +34,7 @@ bp1 <- analysis_2_clean_aug %>%
         axis.text.x = element_text(size = 8),
         axis.text.y = element_text(size = 8))
 
+
 bp2 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = continent, 
                        y = PositiveRate, 
@@ -49,31 +50,34 @@ bp2 <- analysis_2_clean_aug %>%
         axis.text.x = element_text(size = 8),
         axis.text.y = element_text(size = 8))
 
+bp_combined <- bp1 + bp2
+
 # Linear regression
 
-analysis_2_clean_aug %>% 
+p1 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PositiveRate, 
                        y = Casesper100kpp)) + 
   facet_wrap(~continent) + # We can use this or not
-  labs(x = "Cumulative tests per person",
+  labs(x = "Positive rate",
        y = "Number of cases per 100k inhabitants")+
   geom_smooth(method = lm) +
   geom_point() +
   theme(legend.position = "bottom")
 
 
-analysis_2_clean_aug %>% 
+p2 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = Tests_pp, 
                        y = Casesper100kpp)) + 
   facet_wrap(~continent) + # We can use this or not
   labs(x = "Cumulative tests per person",
        y = "Number of cases per 100k inhabitants")+
-  geom_smooth(method = lm) +
+  geom_smooth(method = lm,
+              fullrange = TRUE) +
   geom_point() +
   theme(legend.position = "bottom")
 
 
-analysis_2_clean_aug %>% 
+p3 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = BasicSaniAcc, 
                        y = PositiveRate)) + 
   facet_wrap(~continent)+ # We can use this or not
@@ -84,7 +88,7 @@ analysis_2_clean_aug %>%
   theme(legend.position = "bottom")
 
 
-analysis_2_clean_aug %>% 
+p4 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PopDens, 
                        y = PositiveRate)) + 
   facet_wrap(~continent) + # We can use this or not
@@ -95,17 +99,35 @@ analysis_2_clean_aug %>%
   theme(legend.position = "bottom")
 
 
-# Density plot, not sure if relevant
-analysis_2_clean_aug %>% 
+p5 <- analysis_2_clean_aug %>% 
+  ggplot(mapping = aes(x = GovtHealthUSD_pp,
+                       y = Tests_pp)) +
+  geom_smooth(method = lm) +
+  geom_point() +
+  labs(x = "Governmental healthcare spendings per person (USD)",
+       y = "Cumulative tests per person")
+
+
+p6 <- analysis_2_clean_aug %>% 
+  ggplot(mapping = aes(x = GovtHealthUSD_pp,
+                       y = PositiveRate)) +
+  geom_smooth(method = lm) +
+  geom_point() +
+  labs(x = "Governmental healthcare spendings per person (USD)",
+       y = "Positive Rate")
+
+
+p7 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PositiveRate,
-                       fill = continent)) +
-  geom_density(alpha = 0.5) +
+                       y = FatalityRate)) +
+  geom_smooth(method = lm) +
+  geom_point() +
   labs(x = "Positive rate",
-       y = "Density")
+       y = "Fatality rate")
 
 
 # 10 countries with highest Positive Rate
-analysis_2_clean_aug %>%
+b1 <- analysis_2_clean_aug %>%
   slice_max(order_by = PositiveRate,
             n=10) %>% 
   mutate(Country = fct_reorder(Country, 
@@ -118,7 +140,7 @@ analysis_2_clean_aug %>%
   geom_bar(stat="Identity")
 
 # 10 countries with lowest Positive Rate
-analysis_2_clean_aug %>%
+b2 <- analysis_2_clean_aug %>%
   slice_min(order_by = PositiveRate,
             n=10) %>% 
   mutate(Country = fct_reorder(Country, 
@@ -130,17 +152,6 @@ analysis_2_clean_aug %>%
   coord_flip() +
   geom_bar(stat="Identity")
 
-#
-analysis_2_clean_aug %>% 
-  ggplot(mapping = aes(x = WomanInParlia,
-                       y = PositiveRate,
-                       color = continent)) +
-  geom_smooth(method = lm) +
-  geom_point()+
-  labs(x = "Women in Parliament",
-       y = "Positive Rate")
-
-
 # Write data --------------------------------------------------------------
 ggsave("Boxplot_CumulativeTesting_Continent.png", 
        path = "results/",
@@ -149,5 +160,27 @@ ggsave("Boxplot_CumulativeTesting_Continent.png",
 ggsave("Boxplot_PositiveRate_Continent.png", 
        path = "results/",
        plot = bp2)
-write_tsv(...)
-ggsave(...)
+
+ggsave("Boxplot_Testing_and_PositiveRate_Continent.png", 
+       path = "results/",
+       plot = bp_combined)
+
+ggsave("Cases_vs_Testing_Projection.png", 
+       path = "results/",
+       plot = p2)
+
+ggsave("Tests_vs_GovernmentalHealthSpending.png", 
+       path = "results/",
+       plot = p5)
+
+ggsave("PositiveRate_vs_GovernmentalHealthSpending.png", 
+       path = "results/",
+       plot = p6)
+
+ggsave("10_Highest_PositiveRate.png", 
+       path = "results/",
+       plot = b1)
+
+ggsave("10_Lowest_PositiveRate.png", 
+       path = "results/",
+       plot = b2)
