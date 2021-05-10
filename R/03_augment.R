@@ -6,6 +6,10 @@ rm(list = ls())
 library("tidyverse")
 
 
+# Define functions --------------------------------------------------------
+source(file = "R/99_project_functions.R")
+
+
 # Load data ---------------------------------------------------------------
 combined_1_clean <- read_tsv(file = "data/02_combined_1_clean.tsv")
 combined_2_clean <- read_tsv(file = "data/02_combined_2_clean.tsv")

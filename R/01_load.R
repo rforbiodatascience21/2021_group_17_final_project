@@ -5,7 +5,6 @@ rm(list = ls())
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 
-
 # Load data ---------------------------------------------------------------
 data01_raw <- read_csv(file = "data/_raw/01_JH_time_series_covid19_confirmed_global.csv")
 data02_raw <- read_csv(file = "data/_raw/02_JH_time_series_covid19_deaths_global.csv")

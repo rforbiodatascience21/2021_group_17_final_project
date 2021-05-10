@@ -14,7 +14,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-library("tidyverse")
 ```
 
 ## Index
@@ -65,7 +64,7 @@ To do this we performed an exploratory analysis using different datasets
 
 ## Methods
 
-![Worflow chart](presentation-figure/Workflow.png){height=400}
+![Worflow chart](presentation-figure/Workflow.png)
 
 
 
@@ -74,7 +73,6 @@ For the time series datasets we selected the Country/Region column and the numbe
 
 The same procedure was appliad to dataset 02.
 ```{r, echo = FALSE, message = FALSE, results = 'hide'}
-
 data01_pres <- read_tsv(file = "data/01_JH_01CovidCases.tsv")
 ```
 ```{r, echo = FALSE}
@@ -135,7 +133,7 @@ We added the following new attributes to the dataset:
 ## Methods
 ```{r, echo=FALSE, message = FALSE}
 library("patchwork")
-data_clean_aug <- read_tsv(file = "data/03_analysis_1_clean_aug.tsv")
+data_clean_aug <- read_tsv(file = "data/03_data_clean_aug.tsv")
 data_clean_aug
 ```
 
@@ -147,23 +145,23 @@ data_clean_aug
 
 ## Data analysis
 
-![](results/Scatterplot_smoking_all.png){height=400}
+![](results/Scatterplot_smoking_all.png)
 
 
 
 ## Data analysis
 
-![](results/Scatterplot_smoking_continent.png){height=400}
+![](results/Scatterplot_smoking_continent.png)
 
 ## Data analysis
 
-![](results/Scatterplot_saniacc_all.png){height=400}
+![](results/Scatterplot_saniacc_all.png)
 
 ## Data analysis
 
-![](results/Densityplot_continent.png){height=400}
+![](results/Densityplot_continent.png)
 
 ## Data analysis
 
-![](results/Fatalityrate_europe.png){height=400}
+![](results/Fatalityrate_europe.png)
 
