@@ -47,8 +47,10 @@ JH_03 <- JH_data %>%
 
 # Only keep total population of countries (eliminate regional data)
 data_covid <- JH_01 %>% 
-  left_join(JH_02, by="Country") %>% 
-  left_join(JH_03, by="Country")
+  left_join(JH_02, 
+            by="Country") %>% 
+  left_join(JH_03, 
+            by="Country")
 
 # Full join gapminder data by country
 # Replace NAs with mean of variable
@@ -117,7 +119,8 @@ data_continent <- data_continent %>%
 # Selection of cumulative tests done by 2021-04-30
 all_testing <- all_testing %>% 
   separate("Entity",
-           c("Country", "TestUnit"),
+           c("Country", 
+             "TestUnit"),
            sep = " - ") %>%
   filter(TestUnit != "units unclear") %>% 
   filter(str_detect(Date, 
@@ -133,12 +136,15 @@ all_testing <- all_testing %>%
 # Full join, to see which countries are excluded in our analysis
 # Drop all countries with NA values to get the clean data set
 combined_1_clean <- data_covid %>% 
-  left_join(data_continent, by="Country") %>% 
-  left_join(data_gapminder, by="Country") %>% 
+  left_join(data_continent, 
+            by="Country") %>% 
+  left_join(data_gapminder, 
+            by="Country") %>% 
   drop_na()
   
 combined_2_clean <- combined_1_clean %>% 
-  left_join(all_testing, by="Country") %>% 
+  left_join(all_testing, 
+            by="Country") %>% 
   drop_na()
 
 

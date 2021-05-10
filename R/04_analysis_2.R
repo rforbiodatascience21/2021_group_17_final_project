@@ -19,7 +19,7 @@ analysis_2_clean_aug <- read_tsv(file = "data/03_analysis_2_clean_aug.tsv")
 
 
 # Box plots of Tests per person and Positive Rate for each continent.
-pl1 <- analysis_2_clean_aug %>% 
+bp1 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = continent, 
                        y = Tests_pp, 
                        fill = continent)) +
@@ -34,7 +34,7 @@ pl1 <- analysis_2_clean_aug %>%
         axis.text.x = element_text(size = 8),
         axis.text.y = element_text(size = 8))
 
-pl2 <- analysis_2_clean_aug %>% 
+bp2 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = continent, 
                        y = PositiveRate, 
                        fill = continent)) +
@@ -48,28 +48,28 @@ pl2 <- analysis_2_clean_aug %>%
         axis.title = element_text(size = 12),
         axis.text.x = element_text(size = 8),
         axis.text.y = element_text(size = 8))
-pl1 + pl2
 
-ggsave("Boxplot_CumulativeTesting_Continent.png", 
-       path = "results/",
-       plot = pl1)
-
-ggsave("Boxplot_PositiveRate_Continent.png", 
-       path = "results/",
-       plot = pl2)
 # Linear regression
 
-# Without fill=continent the linear regression is clearer.
+analysis_2_clean_aug %>% 
+  ggplot(mapping = aes(x = PositiveRate, 
+                       y = Casesper100kpp)) + 
+  facet_wrap(~continent) + # We can use this or not
+  labs(x = "Cumulative tests per person",
+       y = "Number of cases per 100k inhabitants")+
+  geom_smooth(method = lm) +
+  geom_point() +
+  theme(legend.position = "bottom")
+
 
 analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = Tests_pp, 
                        y = Casesper100kpp)) + 
-  facet_wrap(~continent)+ # We can use this or not
+  facet_wrap(~continent) + # We can use this or not
   labs(x = "Cumulative tests per person",
        y = "Number of cases per 100k inhabitants")+
-  geom_smooth(method = lm,
-              fullrange = TRUE) +
-  geom_point()+
+  geom_smooth(method = lm) +
+  geom_point() +
   theme(legend.position = "bottom")
 
 
@@ -78,18 +78,18 @@ analysis_2_clean_aug %>%
                        y = PositiveRate)) + 
   facet_wrap(~continent)+ # We can use this or not
   labs(x = "Basic Sanitaion Access",
-       y = "Positive rate")+
+       y = "Positive rate") +
   geom_smooth(method = lm) +
-  geom_point()+
+  geom_point() +
   theme(legend.position = "bottom")
 
 
 analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PopDens, 
                        y = PositiveRate)) + 
-  facet_wrap(~continent)+ # We can use this or not
+  facet_wrap(~continent) + # We can use this or not
   labs(x = "Population density",
-       y = "Positive rate")+
+       y = "Positive rate") +
   geom_smooth(method = lm) +
   geom_point()+
   theme(legend.position = "bottom")
@@ -99,7 +99,7 @@ analysis_2_clean_aug %>%
 analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PositiveRate,
                        fill = continent)) +
-  geom_density(alpha = 0.5)+
+  geom_density(alpha = 0.5) +
   labs(x = "Positive rate",
        y = "Density")
 
@@ -107,7 +107,7 @@ analysis_2_clean_aug %>%
 # 10 countries with highest Positive Rate
 analysis_2_clean_aug %>%
   slice_max(order_by = PositiveRate,
-            n=10)%>% 
+            n=10) %>% 
   mutate(Country = fct_reorder(Country, 
                                PositiveRate,
                                .desc = FALSE)) %>% 
@@ -120,7 +120,7 @@ analysis_2_clean_aug %>%
 # 10 countries with lowest Positive Rate
 analysis_2_clean_aug %>%
   slice_min(order_by = PositiveRate,
-            n=10)%>% 
+            n=10) %>% 
   mutate(Country = fct_reorder(Country, 
                                PositiveRate,
                                .desc = TRUE)) %>% 
@@ -142,5 +142,12 @@ analysis_2_clean_aug %>%
 
 
 # Write data --------------------------------------------------------------
+ggsave("Boxplot_CumulativeTesting_Continent.png", 
+       path = "results/",
+       plot = bp1)
+
+ggsave("Boxplot_PositiveRate_Continent.png", 
+       path = "results/",
+       plot = bp2)
 write_tsv(...)
 ggsave(...)
