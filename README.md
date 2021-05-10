@@ -102,7 +102,10 @@ Pre-work:
 
 ## Things to ask Leon:
 
-- final presentation: using premade tables?
-- first augment, then handling the NAs?
-- when is the hand-in on monday?
-- 
+- Final presentation: using premade tables?
+- Or create tables in Rmarkdown? (hiding the code)
+- Presentation: How much code?
+- Presentation: How much should we talk about process, and how much about the results?
+- Such we avoid selecting the variables we are interest in in the load script?
+- Handling of the NAs related to LandSqKm?
+- Augment, drop NA's, or leave it as it is?
