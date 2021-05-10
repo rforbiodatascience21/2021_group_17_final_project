@@ -62,7 +62,11 @@ results_anova <- data_nested %>%
   rename("pvalue" = "Pr(>F)") %>%
   filter(pvalue <= 0.05) %>% 
   select(y_names, variable, pvalue) %>% 
-  pivot_wider(names_from = y_names, values_from = pvalue)
+  pivot_wider(names_from = y_names, values_from = pvalue) %>% 
+  rename(p.value_Casesper100kpp = Casesper100kpp) %>% 
+  rename(p.value_Deathsper100kpp = Deathsper100kpp) %>% 
+  rename(p.value_FatalityRate = FatalityRate) %>% 
+  rename(p.value_PositiveRate = PositiveRate)
 
 results_estimates <- data_nested %>% 
   select(y_names, mdl_tidy) %>% 
@@ -70,10 +74,19 @@ results_estimates <- data_nested %>%
   select(y_names, term, estimate, std.error, conf.low, conf.high)
 
 
-# Visualize data ----------------------------------------------------------
-
-
 
 # Write data --------------------------------------------------------------
-#write_tsv(...)
-#ggsave(...)
+write_tsv(x = results_anova, 
+          file = "results/Ancova_pvalues.tsv")
+write_tsv(x = results_estimates 
+          %>%  filter( y_names == "Casesper100kpp"), 
+          file = "results/Estimates_Casesper100kpp.tsv")
+write_tsv(x = results_estimates 
+          %>%  filter( y_names == "Deathsper100kpp"), 
+          file = "results/Estimates_Deathsper100kpp.tsv")
+write_tsv(x = results_estimates 
+          %>%  filter( y_names == "FatalityRate"), 
+          file = "results/Estimates_FatalityRate.tsv")
+write_tsv(x = results_estimates 
+          %>%  filter( y_names == "PositiveRate"), 
+          file = "results/Estimates_PositiveRate.tsv")
