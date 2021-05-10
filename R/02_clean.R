@@ -6,53 +6,50 @@ rm(list = ls())
 library("tidyverse")
 
 
-# Define functions --------------------------------------------------------
-source(file = "R/99_project_functions.R")
-
-
 # Load data ---------------------------------------------------------------
-
 #Make list of input files
-my_files = list.files(path = "/cloud/project/data",
-                      pattern = "^01_.+\\.tsv$")
+JH_files = list.files(path = "/cloud/project/data",
+                      pattern = "^01_JH_.+\\.tsv$")
 
-#The working directory is changed to retrieve the data
-setwd("/cloud/project/data")
+Gap_files = list.files(path = "/cloud/project/data",
+                       pattern = "^01_Gap_.+\\.tsv$")
 
 #Read in data as tsv
-my_data = map(my_files, read_tsv)
-
+setwd("/cloud/project/data")
+JH_data = map(JH_files, read_tsv)
+Gap_data = map(Gap_files, read_tsv)
 setwd("/cloud/project")
 
-# Wrangle data ------------------------------------------------------------
+data_continent <- read_tsv(file = "data/01_CC_22DataRegions.tsv")
 
+all_testing <- read_tsv(file = "data/01_OWID_23AllTesting.tsv")
+
+
+# Wrangle data ------------------------------------------------------------
 #Countries separated by region (ex Australia) are summarized into one variable
-data01 <- my_data %>%
+JH_01 <- JH_data %>%
   pluck(1) %>% 
   group_by(Country) %>% 
   summarise_all(sum)
 
-data02 <- my_data %>% 
+JH_02 <- JH_data %>% 
   pluck(2) %>% 
   group_by(Country) %>% 
   summarise_all(sum)
 
-data03 <- my_data %>% 
+JH_03 <- JH_data %>% 
   pluck(3)
 
-#Only keep total population of countries (eliminate regional data)
-data_covid <- data01 %>% 
-  left_join(data02, by="Country") %>% 
-  left_join(data03, by="Country")
+# Only keep total population of countries (eliminate regional data)
+data_covid <- JH_01 %>% 
+  left_join(JH_02, by="Country") %>% 
+  left_join(JH_03, by="Country")
 
-
-#Full join gapminder data by country
-data_gapminder <- my_data[4:21] %>% 
+# Full join gapminder data by country
+# Replace NAs with mean of variable
+data_gapminder <- Gap_data %>% 
   reduce(full_join, 
-         by="country")
-
-#Replace NAs with mean
-data_gapminder <- data_gapminder %>% 
+         by="country") %>% 
   mutate_if(is_numeric,
             function(x)
             {replace_na(x, 
@@ -60,7 +57,7 @@ data_gapminder <- data_gapminder %>%
                              na.rm=TRUE))
             })
 
-#Fix names, so they are in agreement with data_covid
+# Fix names, so they are in agreement with data_covid
 data_gapminder <- data_gapminder %>% 
   mutate(country = case_when(country == "Myanmar" ~ "Burma",
                              country == "Cape Verde" ~ "Cabo Verde",
@@ -80,12 +77,10 @@ data_gapminder <- data_gapminder %>%
                              country == "United States" ~ "US",
                              country == "Palestine" ~ "West Bank and Gaza",
                              TRUE ~ country)) %>% 
-  rename('Country' = 'country')
-
+  rename("Country" = "country")
 
 # To join all data together the countries variable has to be spelled the same way in every dataframe
-data_continent <- my_data %>% 
-  pluck(22) %>% 
+data_continent <- data_continent %>% 
   mutate(country = case_when(country == "Congo" ~ "Congo (Brazzaville)",
                              country == "Côte D'Ivoire" ~ "Cote d'Ivoire",
                              country == "Democratic Republic of the Congo" ~ "Congo (Kinshasa)",
@@ -116,20 +111,7 @@ data_continent <- my_data %>%
                              TRUE ~ country)) %>% 
          rename(Country = country)
 
-#EU testing - Currently not used
-EU_testing <- my_data %>%
-  pluck(23) %>% 
-  filter(level == "national") %>% 
-  select("country", 
-         "tests_done") %>% 
-  group_by(country) %>% 
-  summarise_all(sum)
-
-
-#All testing - Currently not used
-all_testing <- my_data %>%
-  pluck(24)
-
+# Selection of cumulative tests done by 2021-04-30
 all_testing <- all_testing %>% 
   separate("Entity",
            c("Country", "TestUnit"),
@@ -144,7 +126,6 @@ all_testing <- all_testing %>%
   mutate(Country = case_when(Country == "South Korea" ~ "Korea, South",
                              Country == "United States" ~ "US",
                              TRUE ~ Country))
-
 
 # Full join, to see which countries are excluded in our analysis
 data_full <- data_covid %>% 
@@ -162,6 +143,7 @@ data_clean <- data_full %>%
 
 data_testing_clean <- data_full_testing %>% 
   drop_na()
+
 
 # Write data --------------------------------------------------------------
 write_tsv(x = data_clean,
