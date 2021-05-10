@@ -13,6 +13,40 @@ analysis_2_clean_aug <- read_tsv(file = "data/03_analysis_2_clean_aug.tsv")
 
 # Visualise data ----------------------------------------------------------
 
+data_2_numeric <- analysis_2_clean_aug  %>% 
+  mutate(isAfrica = case_when(continent == 'Africa' ~ 1,
+                              continent != 'Africa' ~ 0)) %>% 
+  mutate(isAmericas = case_when(continent == 'Americas' ~ 1,
+                                continent != 'Americas' ~ 0)) %>% 
+  mutate(isAsia = case_when(continent == 'Asia' ~ 1,
+                            continent != 'Asia' ~ 0)) %>% 
+  mutate(isEurope = case_when(continent == 'Europe' ~ 1,
+                              continent != 'Europe' ~ 0)) %>% 
+  mutate(isOceania = case_when(continent == 'Oceania' ~ 1,
+                               continent != 'Oceania' ~ 0)) %>% 
+  select_if(is.numeric)
+
+#PCA fit of the Positive Rate
+pca_fit_positive <- data_2_numeric %>% 
+  select(-PositiveRate) %>% 
+  prcomp(scale. = TRUE)
+
+
+#PCA plot for the Positive Rate
+pca_fit_positive %>% 
+  augment(data_2_numeric) %>% 
+  mutate(PositiveRate = log(PositiveRate)) %>% 
+  ggplot(aes(.fittedPC1, 
+             .fittedPC2, 
+             color = PositiveRate)) +
+  scale_color_viridis(option = 'C',
+                      name = 'log(PositiveRate)') +
+  geom_point(size = 2) +
+  labs(x = 'PC1',
+       y = 'PC2')
+
+
+
 
 # Box plots of Tests per person and Positive Rate for each continent.
 bp1 <- analysis_2_clean_aug %>% 
