@@ -168,11 +168,44 @@ data_clean_aug
 ![](results/Fatalityrate_europe.png){height=400}
 
 ## Data analysis 
-![](results/PCA_first_analysis.png){height=400}
+![](results/PCA_first_analysis.png){height=500}
 
 
 ## Data analysis
-General linear model was fitted
+
+![](results/Boxplot_Testing_and_PositiveRate_Continent.png){height=450}
+
+## Data analysis
+
+![](results/Cases_vs_Testing_Projection.png){height=450}
+
+
+## Data analysis
+
+![](results/Tests_vs_GovernmentalHealthSpending.png){height=450}
+
+
+## Data analysis
+
+![](results/10_Highest_PositiveRate.png){height=450}
+
+## Data analysis
+
+![](results/10_Lowest_PositiveRate.png){height=450}
+
+## Modelling
+
+
+### 4 different y variables
+  -	Cases per 100k persons, Deaths per 100k persons, Fatality rate (Deaths/Cases), Positive rate (Cases/Tests)
+
+
+
+### 19 different x variables:
+  -	Continent, % of urban population, % of smoking adults, blood pressure, Cholesterol levels, BMI, etc.
+
+For each of the y variables we fitted a linear model without any interaction terms. Because we had categorical variables, we then a ancova to identify the significant attributes (alpha=0.05).
+
 
 ## Data analysis
 ```{r, echo = FALSE, message = FALSE}
