@@ -42,11 +42,10 @@ JH_02 <- JH_data %>%
   group_by(Country) %>% 
   summarise_all(sum)
 
-#get 
 JH_03 <- JH_data %>% 
   pluck(3)
 
-# Only keep total population of countries (eliminate regional data)
+# Only keep total population of countries (disregard regional data)
 data_covid <- JH_01 %>% 
   left_join(JH_02, 
             by="Country") %>% 
@@ -133,6 +132,7 @@ all_testing <- all_testing %>%
   mutate(Country = case_when(Country == "South Korea" ~ "Korea, South",
                              Country == "United States" ~ "US",
                              TRUE ~ Country))
+
 
 # Full join, to see which countries are excluded in our analysis
 # Drop all countries with NA values to get the clean data set
