@@ -11,12 +11,12 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-analysis_1_clean <- read_tsv(file = "data/02_analysis_1_clean.tsv")
-analysis_2_clean <- read_tsv(file = "data/02_analysis_2_clean.tsv")
+combined_1_clean <- read_tsv(file = "data/02_combined_1_clean.tsv")
+combined_2_clean <- read_tsv(file = "data/02_combined_2_clean.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-analysis_1_clean_aug <- analysis_1_clean %>%
+analysis_1_clean_aug <- combined_1_clean %>%
   mutate(Casesper100kpp = round((Cases / Population * 100000), 
                                 digits = 2)) %>% 
   mutate(Deathsper100kpp = round((Deaths / Population * 100000), 
@@ -44,7 +44,7 @@ analysis_1_clean_aug <- analysis_1_clean %>%
 
 
 
-analysis_2_clean_aug <- analysis_2_clean %>%
+analysis_2_clean_aug <- combined_2_clean %>%
   mutate(PositiveRate = round((Cases / CumulativeTesting), 
                               digits = 3)) %>% 
   mutate(Tests_pp = round((CumulativeTesting / Population), 

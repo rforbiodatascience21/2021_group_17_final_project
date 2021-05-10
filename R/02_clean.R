@@ -132,19 +132,19 @@ all_testing <- all_testing %>%
 
 # Full join, to see which countries are excluded in our analysis
 # Drop all countries with NA values to get the clean data set
-analysis_1_clean <- data_covid %>% 
+combined_1_clean <- data_covid %>% 
   left_join(data_continent, by="Country") %>% 
   left_join(data_gapminder, by="Country") %>% 
   drop_na()
   
-analysis_2_clean <- analysis_1_clean %>% 
+combined_2_clean <- combined_1_clean %>% 
   left_join(all_testing, by="Country") %>% 
   drop_na()
 
 
 # Write data --------------------------------------------------------------
-write_tsv(x = analysis_1_clean,
-          file = "data/02_analysis_1_clean.tsv")
+write_tsv(x = combined_1_clean,
+          file = "data/02_combined_1_clean.tsv")
 
-write_tsv(x = analysis_2_clean,
-          file = "data/02_analysis_2_clean.tsv")
+write_tsv(x = combined_2_clean,
+          file = "data/02_combined_2_clean.tsv")
