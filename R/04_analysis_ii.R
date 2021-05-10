@@ -53,7 +53,7 @@ pca_fit_positive %>%
 
 
 # Box plots of Tests per person and Positive Rate for each continent.
-pl1 <- analysis_2_clean_aug %>% 
+bp1 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = continent, 
                        y = Tests_pp, 
                        fill = continent)) +
@@ -68,12 +68,9 @@ pl1 <- analysis_2_clean_aug %>%
         axis.text.x = element_text(size = 8),
         axis.text.y = element_text(size = 8))
 
-<<<<<<< HEAD:R/04_analysis_ii.R
+
 
 bp2 <- analysis_2_clean_aug %>% 
-=======
-pl2 <- analysis_2_clean_aug %>% 
->>>>>>> d88c1d62d49e6a37c76745d41623cacd8c2bbd4e:R/04_analysis_2.R
   ggplot(mapping = aes(x = continent, 
                        y = PositiveRate, 
                        fill = continent)) +
@@ -87,9 +84,8 @@ pl2 <- analysis_2_clean_aug %>%
         axis.title = element_text(size = 12),
         axis.text.x = element_text(size = 8),
         axis.text.y = element_text(size = 8))
-pl1 + pl2
 
-<<<<<<< HEAD:R/04_analysis_ii.R
+
 bp_combined <- bp1 + bp2
 
 # Linear regression
@@ -103,18 +99,6 @@ p1 <- analysis_2_clean_aug %>%
   geom_smooth(method = lm) +
   geom_point() +
   theme(legend.position = "bottom")
-=======
-ggsave("Boxplot_CumulativeTesting_Continent.png", 
-       path = "results/",
-       plot = pl1)
-
-ggsave("Boxplot_PositiveRate_Continent.png", 
-       path = "results/",
-       plot = pl2)
-# Linear regression
->>>>>>> d88c1d62d49e6a37c76745d41623cacd8c2bbd4e:R/04_analysis_2.R
-
-# Without fill=continent the linear regression is clearer.
 
 p2 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = Tests_pp, 
@@ -124,11 +108,7 @@ p2 <- analysis_2_clean_aug %>%
        y = "Number of cases per 100k inhabitants")+
   geom_smooth(method = lm,
               fullrange = TRUE) +
-<<<<<<< HEAD:R/04_analysis_ii.R
   geom_point() +
-=======
-  geom_point()+
->>>>>>> d88c1d62d49e6a37c76745d41623cacd8c2bbd4e:R/04_analysis_2.R
   theme(legend.position = "bottom")
 
 
@@ -174,14 +154,10 @@ p6 <- analysis_2_clean_aug %>%
 
 p7 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PositiveRate,
-<<<<<<< HEAD:R/04_analysis_ii.R
                        y = FatalityRate)) +
   geom_smooth(method = lm) +
   geom_point() +
-=======
-                       fill = continent)) +
-  geom_density(alpha = 0.5)+
->>>>>>> d88c1d62d49e6a37c76745d41623cacd8c2bbd4e:R/04_analysis_2.R
+  geom_density(alpha = 0.5) +
   labs(x = "Positive rate",
        y = "Fatality rate")
 
@@ -213,7 +189,6 @@ b2 <- analysis_2_clean_aug %>%
   geom_bar(stat="Identity")
 
 # Write data --------------------------------------------------------------
-<<<<<<< HEAD:R/04_analysis_ii.R
 ggsave("Boxplot_CumulativeTesting_Continent.png", 
        path = "results/",
        plot = bp1)
@@ -245,7 +220,3 @@ ggsave("10_Highest_PositiveRate.png",
 ggsave("10_Lowest_PositiveRate.png", 
        path = "results/",
        plot = b2)
-=======
-write_tsv(...)
-ggsave(...)
->>>>>>> d88c1d62d49e6a37c76745d41623cacd8c2bbd4e:R/04_analysis_2.R
