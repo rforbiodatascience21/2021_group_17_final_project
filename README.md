@@ -100,6 +100,14 @@ Pre-work:
 - Preparing the presentation and add plots (save them) (**Carlota**)
 - Augment the Covid-19 testing dataset, and create framework for second analysis (**Mathias**)
 
+
+### Work split up Monday
+- Load raw data from the internet (**Mathias**)
+- Move the data wrangling in the load script to the clean script (**Mathias**)
+- Redo presentation - skip code, save tables as tsv-files, save plots as images in the results folder (**Carlota**)
+- PCA (for each y-variable) (**Thomas**)
+- Linear regression (**Annette**)
+
 ## Things to ask Leon:
 
 - Final presentation: using premade tables?
