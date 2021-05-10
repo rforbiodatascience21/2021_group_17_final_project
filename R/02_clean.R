@@ -42,6 +42,7 @@ JH_02 <- JH_data %>%
   group_by(Country) %>% 
   summarise_all(sum)
 
+#get 
 JH_03 <- JH_data %>% 
   pluck(3)
 
