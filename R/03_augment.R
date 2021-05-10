@@ -11,12 +11,12 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-data_clean <- read_tsv(file = "data/02_data_clean.tsv")
-data_testing_clean <- read_tsv(file = "data/02_data_testing_clean.tsv")
+analysis_1_clean <- read_tsv(file = "data/02_analysis_1_clean.tsv")
+analysis_2_clean <- read_tsv(file = "data/02_analysis_2_clean.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-data_clean_aug <- data_clean %>%
+analysis_1_clean_aug <- analysis_1_clean %>%
   mutate(Casesper100kpp = round((Cases / Population * 100000), 
                                 digits = 2)) %>% 
   mutate(Deathsper100kpp = round((Deaths / Population * 100000), 
@@ -44,7 +44,7 @@ data_clean_aug <- data_clean %>%
 
 
 
-data_testing_clean_aug <- data_testing_clean %>%
+analysis_2_clean_aug <- analysis_2_clean %>%
   mutate(PositiveRate = round((Cases / CumulativeTesting), 
                               digits = 3)) %>% 
   mutate(Tests_pp = round((CumulativeTesting / Population), 
@@ -77,7 +77,7 @@ data_testing_clean_aug <- data_testing_clean %>%
 
 
 # Write data --------------------------------------------------------------
-write_tsv(x = data_clean_aug,
-          file = "data/03_data_clean_aug.tsv")
-write_tsv(x = data_testing_clean_aug,
-          file = "data/03_data_testing_clean_aug.tsv")
+write_tsv(x = analysis_1_clean_aug,
+          file = "data/03_analysis_1_clean_aug.tsv")
+write_tsv(x = analysis_2_clean_aug,
+          file = "data/03_analysis_2_clean_aug.tsv")

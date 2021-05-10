@@ -14,8 +14,8 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-data1 <- read_tsv(file = "data/03_data_clean_aug.tsv")
-data2 <- read_tsv(file = "data/03_data_testing_clean_aug.tsv")
+data1 <- read_tsv(file = "data/03_analysis_1_clean_aug.tsv")
+data2 <- read_tsv(file = "data/03_analysis_2_clean_aug.tsv")
 
 
 # Wrangle data ------------------------------------------------------------

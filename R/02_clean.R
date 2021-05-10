@@ -16,8 +16,13 @@ Gap_files = list.files(path = "/cloud/project/data",
 
 #Read in data as tsv
 setwd("/cloud/project/data")
-JH_data = map(JH_files, read_tsv)
-Gap_data = map(Gap_files, read_tsv)
+
+JH_data = map(JH_files, 
+              read_tsv)
+
+Gap_data = map(Gap_files, 
+               read_tsv)
+
 setwd("/cloud/project")
 
 data_continent <- read_tsv(file = "data/01_CC_22DataRegions.tsv")
@@ -126,26 +131,20 @@ all_testing <- all_testing %>%
                              TRUE ~ Country))
 
 # Full join, to see which countries are excluded in our analysis
-data_full <- data_covid %>% 
-  full_join(data_continent, by="Country") %>% 
-  full_join(data_gapminder, by="Country")
-
-data_full_testing <- data_covid %>% 
-  full_join(data_continent, by="Country") %>% 
-  full_join(data_gapminder, by="Country") %>% 
-  full_join(all_testing, by="Country")
-
 # Drop all countries with NA values to get the clean data set
-data_clean <- data_full %>% 
+analysis_1_clean <- data_covid %>% 
+  left_join(data_continent, by="Country") %>% 
+  left_join(data_gapminder, by="Country") %>% 
   drop_na()
-
-data_testing_clean <- data_full_testing %>% 
+  
+analysis_2_clean <- analysis_1_clean %>% 
+  left_join(all_testing, by="Country") %>% 
   drop_na()
 
 
 # Write data --------------------------------------------------------------
-write_tsv(x = data_clean,
-          file = "data/02_data_clean.tsv")
+write_tsv(x = analysis_1_clean,
+          file = "data/02_analysis_1_clean.tsv")
 
-write_tsv(x = data_testing_clean,
-          file = "data/02_data_testing_clean.tsv")
+write_tsv(x = analysis_2_clean,
+          file = "data/02_analysis_2_clean.tsv")

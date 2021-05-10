@@ -12,14 +12,14 @@ source(file = "R/99_project_functions.R")
 
 
 # Load data ---------------------------------------------------------------
-data_clean_testing_aug <- read_tsv(file = "data/03_data_testing_clean_aug.tsv")
+analysis_2_clean_aug <- read_tsv(file = "data/03_analysis_2_clean_aug.tsv")
 
 
 # Visualise data ----------------------------------------------------------
 
 
 # Box plots of Tests per person and Positive Rate for each continent.
-pl1 <- data_clean_testing_aug %>% 
+pl1 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = continent, 
                        y = Tests_pp, 
                        fill = continent)) +
@@ -34,7 +34,7 @@ pl1 <- data_clean_testing_aug %>%
         axis.text.x = element_text(size = 8),
         axis.text.y = element_text(size = 8))
 
-pl2 <- data_clean_testing_aug %>% 
+pl2 <- analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = continent, 
                        y = PositiveRate, 
                        fill = continent)) +
@@ -61,7 +61,7 @@ ggsave("Boxplot_PositiveRate_Continent.png",
 
 # Without fill=continent the linear regression is clearer.
 
-data_clean_testing_aug %>% 
+analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = Tests_pp, 
                        y = Casesper100kpp)) + 
   facet_wrap(~continent)+ # We can use this or not
@@ -73,7 +73,7 @@ data_clean_testing_aug %>%
   theme(legend.position = "bottom")
 
 
-data_clean_testing_aug %>% 
+analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = BasicSaniAcc, 
                        y = PositiveRate)) + 
   facet_wrap(~continent)+ # We can use this or not
@@ -84,7 +84,7 @@ data_clean_testing_aug %>%
   theme(legend.position = "bottom")
 
 
-data_clean_testing_aug %>% 
+analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PopDens, 
                        y = PositiveRate)) + 
   facet_wrap(~continent)+ # We can use this or not
@@ -96,7 +96,7 @@ data_clean_testing_aug %>%
 
 
 # Density plot, not sure if relevant
-data_clean_testing_aug %>% 
+analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = PositiveRate,
                        fill = continent)) +
   geom_density(alpha = 0.5)+
@@ -105,7 +105,7 @@ data_clean_testing_aug %>%
 
 
 # 10 countries with highest Positive Rate
-data_clean_testing_aug %>%
+analysis_2_clean_aug %>%
   slice_max(order_by = PositiveRate,
             n=10)%>% 
   mutate(Country = fct_reorder(Country, 
@@ -118,7 +118,7 @@ data_clean_testing_aug %>%
   geom_bar(stat="Identity")
 
 # 10 countries with lowest Positive Rate
-data_clean_testing_aug %>%
+analysis_2_clean_aug %>%
   slice_min(order_by = PositiveRate,
             n=10)%>% 
   mutate(Country = fct_reorder(Country, 
@@ -131,7 +131,7 @@ data_clean_testing_aug %>%
   geom_bar(stat="Identity")
 
 #
-data_clean_testing_aug %>% 
+analysis_2_clean_aug %>% 
   ggplot(mapping = aes(x = WomanInParlia,
                        y = PositiveRate,
                        color = continent)) +
