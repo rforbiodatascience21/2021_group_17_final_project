@@ -213,6 +213,15 @@ ancova_pvalues_data <- read_tsv(file = "results/Ancova_pvalues.tsv")
 ancova_pvalues_data
 ```
 
+## Model limitations
+
+### Further ideas:
+- Check for outliers
+- Check if model assumptions are fullfilled
+- Include interaction terms
+- Use backward/forward term selection to reduce the models
+
+
 ## Conclusions
 
 We have seen that some variables have an effect in the COVID-19 outbreak:
