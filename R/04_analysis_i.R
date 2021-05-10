@@ -44,7 +44,7 @@ pl2 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = Deathsper100kp
        fill = "Continent") +
   theme_classic(base_size = 18,
                 base_family = "Avenir") +
-  theme(legend.position = "none",axis.title = element_text(size = 12),
+  theme(legend.position = "none",axis.title = element_text(size = 8),
         axis.text.x = element_text(size = 8), axis.text.y = element_text(size = 8))
 pl3 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = FatalityRate, fill = continent)) +
   geom_boxplot(alpha = 0.5) +
@@ -53,7 +53,7 @@ pl3 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = FatalityRate, 
        fill = "Continent") +
   theme_classic(base_size = 18,
                 base_family = "Avenir") +
-  theme(legend.position = "none",axis.title = element_text(size = 12),
+  theme(legend.position = "none",axis.title = element_text(size = 8),
         axis.text.x = element_text(size = 8), axis.text.y = element_text(size = 8))
 
 pl1 + pl2 / pl3
