@@ -126,10 +126,14 @@ pl3 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = FatalityRate, 
 
 pl1 + pl2 / pl3
 
+ggsave("Boxplot_first_analysis.png", 
+       path = "results/",
+       plot = (pl1 + pl2 / pl3))
+
 # Linear regression
 
 # Without fill=continent the linear regression is clearer.
-data_clean_aug %>% 
+pl4 <- data_clean_aug %>% 
   ggplot(mapping = aes(x= Smoking, y = Deathsper100kpp, fill=continent)) + 
   #facet_wrap(~continent)+ # We can use this or not
   labs(x = "Smoking index",
@@ -138,7 +142,12 @@ data_clean_aug %>%
   geom_point()+
   theme(legend.position = "bottom")
 
-data_clean_aug %>% 
+ggsave("Scatterplot_smoking_continents.png", 
+       path = "results/",
+       plot = (pl4))
+
+# With out separating by continent
+pl5 <- data_clean_aug %>% 
   ggplot(mapping = aes(x= Smoking, y = Casesper100kpp)) + 
   #facet_wrap(~continent)+ # We can use this or not
   labs(x = "Smoking index",
@@ -146,6 +155,10 @@ data_clean_aug %>%
   geom_smooth(method = lm) +
   geom_point()+
   theme(legend.position = "bottom")
+
+ggsave("Scatterplot_smoking_all.png", 
+       path = "results/",
+       plot = (pl5))
 
 data_clean_aug %>% 
   ggplot(mapping = aes(x= Smoking, y = FatalityRate)) + 
@@ -157,7 +170,7 @@ data_clean_aug %>%
   theme(legend.position = "bottom")
 
 
-data_clean_aug %>% 
+pl6 <- data_clean_aug %>% 
   ggplot(mapping = aes(x= BasicSaniAcc, y = Deathsper100kpp)) + 
   #facet_wrap(~continent)+ # We can use this or not
   labs(x = "BasicSaniAcc",
@@ -166,15 +179,21 @@ data_clean_aug %>%
   geom_point()+
   theme(legend.position = "bottom")
 
+ggsave("Scatterplot_saniacc_all.png", 
+       path = "results/",
+       plot = (pl6))
 
 # Density plot, not sure if relevant
-data_clean_aug %>% 
+pl7 <- data_clean_aug %>% 
   ggplot(mapping = aes(x = FatalityRate,
                      fill=continent)) +
   geom_density(alpha = 0.5)+
   labs(x = "Fatality rate",
        y = "Density")
 
+ggsave("Densityplot_continents.png", 
+       path = "results/",
+       plot = (pl7))
 
 # BMI per continent
 data_clean_aug %>% filter(continent=='Europe') %>%
@@ -185,8 +204,8 @@ data_clean_aug %>% filter(continent=='Europe') %>%
   labs(x = "Country",
        y = "BMI in females")
 
-# Fatality rate per continent
-data_clean_aug %>% filter(continent=='Europe') %>%
+# Fatality rate Europe
+pl8 <- data_clean_aug %>% filter(continent=='Europe') %>%
   ggplot(mapping = aes(x = Country, y = FatalityRate, color=Fatality_class)) + 
   geom_point() +
   coord_flip()+
@@ -194,6 +213,10 @@ data_clean_aug %>% filter(continent=='Europe') %>%
   theme(legend.position = "right",axis.text.y = element_text(size = 7))+
   labs(x = "Country",
        y = "Fatality rate")
+
+ggsave("Fatalityrate_plot_europe.png", 
+       path = "results/",
+       plot = (pl8))
 
 # Write data --------------------------------------------------------------
 write_tsv(...)
