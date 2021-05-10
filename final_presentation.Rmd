@@ -170,3 +170,31 @@ data_clean_aug
 ## Data analysis 
 ![](results/PCA_first_analysis.png){height=400}
 
+
+## Data analysis
+General linear model was fitted
+
+## Data analysis
+```{r, echo = FALSE, message = FALSE}
+ancova_pvalues_data <- read_tsv(file = "results/Ancova_pvalues.tsv")
+ancova_pvalues_data
+```
+
+## Conclusions
+
+We have seen that some variables have an effect in the COVID-19 outbreak:
+
+<center>
+
+![](presentation-figure/flecha.png){height=40}
+
+</center>
+
+It seems that the number of cases and deaths are not really informative about the situation in some countries because the testing rate differs among them.
+<center>
+
+![](presentation-figure/flecha.png){height=40}
+
+</center>
+
+Even when including the testing rate in our analysis it seems that the way this procedure is performed among the countries is very different and that differences should also be taken into account in future analyses (look into metadata about how the testing is carried out in the different countries)
