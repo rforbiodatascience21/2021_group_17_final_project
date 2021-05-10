@@ -107,6 +107,7 @@ data21_raw <- data21_raw  %>%
 data22_raw <- data22_raw  %>% 
   select(country, continent)
 
+
 # Covid-19 testing data
 data23_raw <- data23_raw %>% 
   select("Entity", "Date", "Cumulative.total", "Daily.change.in.cumulative.total") %>% 
