@@ -10,6 +10,10 @@ library("patchwork")
 library("viridis")
 
 
+# Define functions --------------------------------------------------------
+source(file = "R/99_project_functions.R")
+
+
 # Load data ---------------------------------------------------------------
 analysis_1_clean_aug <- read_tsv(file = "data/03_analysis_1_clean_aug.tsv")
 
@@ -148,14 +152,10 @@ pl3 <- analysis_1_clean_aug %>%
 
 pl1 + pl2 / pl3
 
-ggsave("Boxplot_first_analysis.png", 
-       path = "results/",
-       plot = (pl1 + pl2 / pl3))
-
 # Linear regression
 
 # Without fill=continent the linear regression is clearer.
-pl4 <- analysis_1_clean_aug %>% 
+analysis_1_clean_aug %>% 
   ggplot(mapping = aes(x= Smoking, 
                        y = Deathsper100kpp, 
                        fill=continent)) + 
@@ -166,28 +166,28 @@ pl4 <- analysis_1_clean_aug %>%
   geom_point()+
   theme(legend.position = "bottom")
 
-ggsave("Scatterplot_smoking_continent.png", 
-       path = "results/",
-       plot = pl4)
-
-# All continents together
-pl5 <- analysis_1_clean_aug %>% 
+analysis_1_clean_aug %>% 
   ggplot(mapping = aes(x= Smoking, 
-                       y = Deathsper100kpp)) + 
+                       y = Casesper100kpp)) + 
   #facet_wrap(~continent)+ # We can use this or not
   labs(x = "Smoking index",
-       y = "Number of deaths per 100k inhabitants")+
+       y = "Number of cases per 100k inhabitants")+
   geom_smooth(method = lm) +
   geom_point() +
   theme(legend.position = "bottom")
 
-ggsave("Scatterplot_smoking_all.png", 
-       path = "results/",
-       plot = pl5)
+analysis_1_clean_aug %>% 
+  ggplot(mapping = aes(x= Smoking, 
+                       y = FatalityRate)) + 
+  #facet_wrap(~continent)+ # We can use this or not
+  labs(x = "Smoking index",
+       y = "Fatality rate")+
+  geom_smooth(method = lm) +
+  geom_point()+
+  theme(legend.position = "bottom")
 
 
-# Sanitary access scatterplot
-pl6 <- analysis_1_clean_aug %>% 
+analysis_1_clean_aug %>% 
   ggplot(mapping = aes(x= BasicSaniAcc, 
                        y = Deathsper100kpp)) + 
   #facet_wrap(~continent)+ # We can use this or not
@@ -197,20 +197,15 @@ pl6 <- analysis_1_clean_aug %>%
   geom_point()+
   theme(legend.position = "bottom")
 
-ggsave("Scatterplot_saniacc_all.png", 
-       path = "results/",
-       plot = pl6)
 
 # Density plot, not sure if relevant
-pl7 <- analysis_1_clean_aug %>% 
+analysis_1_clean_aug %>% 
   ggplot(mapping = aes(x = FatalityRate,
                      fill=continent)) +
   geom_density(alpha = 0.5)+
   labs(x = "Fatality rate",
        y = "Density")
-ggsave("Densityplot_continent.png", 
-       path = "results/",
-       plot = pl7)
+
 
 # BMI per continent
 analysis_1_clean_aug %>% 
@@ -226,7 +221,7 @@ analysis_1_clean_aug %>%
        y = "BMI in females")
 
 # Fatality rate per continent
-pl8 <- analysis_1_clean_aug %>% 
+analysis_1_clean_aug %>% 
   filter(continent=='Europe') %>%
   ggplot(mapping = aes(x = Country, 
                        y = FatalityRate, 
@@ -240,9 +235,6 @@ pl8 <- analysis_1_clean_aug %>%
   labs(x = "Country",
        y = "Fatality rate")
 
-ggsave("Fatalityrate_europe.png", 
-       path = "results/",
-       plot = pl8)
 # Write data --------------------------------------------------------------
-#write_tsv(...)
-#ggsave(...)
+write_tsv(...)
+ggsave(...)

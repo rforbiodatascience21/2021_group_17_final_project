@@ -54,19 +54,14 @@ COVID-19 has impacted differently in different countries and the reasons why thi
 ![](presentation-figure/flecha.png){height=40}
 
 </center>
-In our project we aim to analyze a set of variables affecting mostly all countries to elucidate which may be the factors affecting COVID-19 outbreak.
-<center>
-
-![](presentation-figure/flecha.png){height=40}
-
-</center>
-To do this we performed an exploratory analysis using different datasets
+In our project we aim to analyze a set of variables affecting mostly all countries to elucidate which may be the most important factors affecting COVID-19 outbreak.
 
 ## Methods
-
-![Worflow chart](presentation-figure/Workflow.png)
-
-
+```{r, echo = FALSE, message = FALSE}
+library("tidyverse")
+data01_raw <- read_csv(file = "data/_raw/01_JH_time_series_covid19_confirmed_global.csv")
+data01_raw
+```
 
 ## Methods
 For the time series datasets we selected the Country/Region column and the number of cases reported the 29th April 2021.
@@ -115,6 +110,11 @@ data01
 
 
 
+## Methods
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+data02_clean <- read_tsv(file = "data/02_data_clean.tsv")
+data02_clean
+```
 
 
 ## Methods
@@ -137,31 +137,87 @@ data_clean_aug <- read_tsv(file = "data/03_data_clean_aug.tsv")
 data_clean_aug
 ```
 
-## Data analysis
-![](presentation-figure/plot1.png)
-
-
 
 
 ## Data analysis
 
-![](results/Scatterplot_smoking_all.png)
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=7.5, fig.height=5.5}
+pl1 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = Casesper100kpp, fill = continent)) +
+  geom_boxplot(alpha = 0.5) +
+  labs(x = "Continent",
+       y = "Number of cases per 100k inhabitants",
+       fill = "Continent") +
+  theme_classic(base_size = 18,
+                base_family = "Avenir") +
+  theme(legend.position = "none",axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 8),axis.text.y = element_text(size = 8))
+pl2 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = Deathsper100kpp, fill = continent)) +
+  geom_boxplot(alpha = 0.5) +
+  labs(x = "Continent",
+       y = "Number of deaths per 100k inhabitants",
+       fill = "Continent") +
+  theme_classic(base_size = 18,
+                base_family = "Avenir") +
+  theme(legend.position = "none",axis.title = element_text(size = 8),
+        axis.text.x = element_text(size = 8), axis.text.y = element_text(size = 8))
+pl3 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = FatalityRate, fill = continent)) +
+  geom_boxplot(alpha = 0.5) +
+  labs(x = "Continent",
+       y = "Fatality rate",
+       fill = "Continent") +
+  theme_classic(base_size = 18,
+                base_family = "Avenir") +
+  theme(legend.position = "none",axis.title = element_text(size = 8),
+        axis.text.x = element_text(size = 8), axis.text.y = element_text(size = 8))
 
+pl1 + pl2 / pl3
 
+```
 
 ## Data analysis
-
-![](results/Scatterplot_smoking_continent.png)
+```{r, echo=FALSE, message=FALSE}
+data_clean_aug %>% 
+  ggplot(mapping = aes(x= Smoking, y = Deathsper100kpp)) + 
+  #facet_wrap(~continent)+ # We can use this or not
+  labs(x = "Smoking index",
+       y = "Number of deaths per 100k inhabitants")+
+  geom_smooth(method = lm) +
+  geom_point()+
+  theme(legend.position = "bottom")
+```
 
 ## Data analysis
-
-![](results/Scatterplot_saniacc_all.png)
+```{r, echo=FALSE, message=FALSE}
+data_clean_aug %>% 
+  ggplot(mapping = aes(x= Smoking, y = Deathsper100kpp, fill=continent)) + 
+  #facet_wrap(~continent)+ # We can use this or not
+  labs(x = "Smoking index",
+       y = "Number of deaths per 100k inhabitants")+
+  geom_smooth(method = lm) +
+  geom_point()+
+  theme(legend.position = "bottom")
+```
 
 ## Data analysis
+```{r}
+data_clean_aug %>% 
+  ggplot(mapping = aes(x = FatalityRate,
+                     fill=continent)) +
+  geom_density(alpha = 0.5)+
+  labs(x = "Fatality rate",
+       y = "Density")
 
-![](results/Densityplot_continent.png)
+```
 
 ## Data analysis
-
-![](results/Fatalityrate_europe.png)
+```{r}
+data_clean_aug %>% filter(continent=='Europe') %>%
+  ggplot(mapping = aes(x = Country, y = FatalityRate, color=Fatality_class)) + 
+  geom_point() +
+  coord_flip()+
+  geom_hline(yintercept = 2.070798, linetype = "dashed")+
+  theme(legend.position = "right",axis.text.y = element_text(size = 7))+
+  labs(x = "Country",
+       y = "Fatality rate")
+```
 

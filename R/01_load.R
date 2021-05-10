@@ -5,7 +5,6 @@ rm(list = ls())
 # Load libraries ----------------------------------------------------------
 library("tidyverse")
 
-
 # Load data ---------------------------------------------------------------
 data01_raw <- read_csv(file = "data/_raw/01_JH_time_series_covid19_confirmed_global.csv")
 data02_raw <- read_csv(file = "data/_raw/02_JH_time_series_covid19_deaths_global.csv")
@@ -34,129 +33,88 @@ data23_raw <- read.csv(file = "data/_raw/23_EU_testing.csv.gz")
 # Wrangle data ------------------------------------------------------------
 # Get number of cases/deaths from last day (29th of April)
 data01_raw <- data01_raw %>%
-  select("Country/Region", 
-         "4/29/21") %>% 
+  select("Country/Region", "4/29/21") %>% 
   rename("Cases" = "4/29/21") %>% 
   rename("Country" = "Country/Region")
 
 data02_raw <- data02_raw %>%
-  select("Country/Region", 
-         "4/29/21") %>% 
+  select("Country/Region", "4/29/21") %>% 
   rename("Deaths" = "4/29/21") %>% 
   rename("Country" = "Country/Region")
 
 # Get combined key and population (combined key used for joining by country only)
 data03_raw <- data03_raw %>% 
-  select("Combined_Key", 
-         "Population") %>% 
+  select("Combined_Key", "Population") %>% 
   rename("Country" = "Combined_Key")
 
 # Gapminder data
 data04_raw <- data04_raw  %>% 
-  select(country, 
-         X2019) %>% 
+  select(country, X2019) %>% 
   rename(UrbanPop = X2019)
-
 data05_raw <- data05_raw  %>% 
-  select(country, 
-         X2017) %>% 
+  select(country, X2017) %>% 
   rename(LifeExp = X2017)
-
 data06_raw <- data06_raw  %>% 
-  select(country, 
-         X2005) %>% 
+  select(country, X2005) %>% 
   rename(Smoking = X2005)
-
 data07_raw <- data07_raw  %>% 
-  select(country, 
-         X2008) %>% 
+  select(country, X2008) %>% 
   rename(AlcConsump = X2008)
-
 data08_raw <- data08_raw  %>% 
-  select(country, 
-         X2008) %>% 
+  select(country, X2008) %>% 
   rename(BMI_m = X2008)
-
 data09_raw <- data09_raw  %>% 
-  select(country, 
-         X2008) %>% 
+  select(country, X2008) %>% 
   rename(BMI_f = X2008)
-
 data10_raw <- data10_raw  %>% 
-  select(country, 
-         X2008) %>% 
+  select(country, X2008) %>% 
   rename(SBP_m = X2008)
-
 data11_raw <- data11_raw  %>% 
-  select(country, 
-         X2008) %>% 
+  select(country, X2008) %>% 
   rename(SBP_f = X2008)
-
 data12_raw <- data12_raw  %>% 
-  select(country, 
-         X2008) %>% 
+  select(country, X2008) %>% 
   rename(cholesterol_m = X2008)
-
 data13_raw <- data13_raw  %>% 
-  select(country, 
-         X2008) %>% 
+  select(country, X2008) %>% 
   rename(cholesterol_f = X2008)
-
 data14_raw <- data14_raw  %>% 
-  select(country, 
-         X2010) %>% 
+  select(country, X2010) %>% 
   rename(GovtHealthUSD_pp = X2010)
-
 data15_raw <- data15_raw  %>% 
-  select(country, 
-         X2010) %>% 
+  select(country, X2010) %>% 
   rename(TotHealthUSD_pp = X2010)
-
 data16_raw <- data16_raw  %>% 
-  select(country, 
-         X2018) %>% 
+  select(country, X2018) %>% 
   rename(LandSqkm = X2018)
-
 data17_raw <- data17_raw  %>% 
-  select(country, 
-         X2011) %>% 
+  select(country, X2011) %>% 
   rename(DemScore = X2011)
-
 data18_raw <- data18_raw  %>% 
-  select(country, 
-         X2017) %>% 
+  select(country, X2017) %>% 
   rename(CPI = X2017)
-
 data19_raw <- data19_raw  %>% 
-  select(country, 
-         X2020) %>% 
+  select(country, X2020) %>% 
   rename(WomanInParlia = X2020)
-
 data20_raw <- data20_raw  %>% 
-  select(country, 
-         X2021) %>% 
+  select(country, X2021) %>% 
   rename(Income_pp = X2021)
-
 data21_raw <- data21_raw  %>% 
-  select(country, 
-         X2017) %>% 
+  select(country, X2017) %>% 
   rename(BasicSaniAcc = X2017)
 
 # Dictionary of continents
 data22_raw <- data22_raw  %>% 
-  select(country, 
-         continent)
+  select(country, continent)
 
 
 # Covid-19 testing data
 data23_raw <- data23_raw %>% 
-  select("Entity", 
-         "Date", 
-         "Cumulative.total", 
-         "Daily.change.in.cumulative.total") %>% 
+  select("Entity", "Date", "Cumulative.total", "Daily.change.in.cumulative.total") %>% 
   rename(CumulativeTesting = Cumulative.total)
 
 # Write data --------------------------------------------------------------
+
 write_tsv(x = data01_raw, 
           file = "data/01_JH_01CovidCases.tsv")
 write_tsv(x = data02_raw, 
