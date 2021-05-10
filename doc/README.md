@@ -2,7 +2,7 @@
 Final project repository
 
 
-## Raw data:
+## Data sources:
 
 ### John Hopkins data
 https://github.com/CSSEGISandData/COVID-19
