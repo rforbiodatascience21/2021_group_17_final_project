@@ -65,7 +65,6 @@ data_gapminder <- data_gapminder %>%
                              country == "Congo, Dem. Rep." ~ "Congo (Kinshasa)",
                              country == "Czech Republic" ~ "Czechia",
                              country == "South Korea" ~ "Korea, South",
-                             country == "" ~ "Kosovo",
                              country == "Kyrgyz Republic" ~ "Kyrgyzstan",
                              country == "Lao" ~ "Laos",
                              country == "Micronesia, Fed. Sts." ~ "Micronesia",
@@ -73,7 +72,6 @@ data_gapminder <- data_gapminder %>%
                              country == "St. Lucia" ~ "Saint Lucia",
                              country == "St. Vincent and the Grenadines" ~ "Saint Vincent and the Grenadines",
                              country == "Slovak Republic" ~ "Slovakia",
-                             country == "" ~ "Taiwan*",
                              country == "United States" ~ "US",
                              country == "Palestine" ~ "West Bank and Gaza",
                              TRUE ~ country)) %>% 
