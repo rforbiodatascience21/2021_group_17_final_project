@@ -7,6 +7,7 @@ library("tidyverse")
 library("broom")
 library("cowplot")
 library("patchwork")
+library("viridis")
 
 
 # Define functions --------------------------------------------------------
@@ -18,16 +19,81 @@ data_clean_aug <- read_tsv(file = "data/03_data_clean_aug.tsv")
 
 
 # Wrangle data ------------------------------------------------------------
-data_clean_aug %>%...
-                
+
+#one hot encode continents and then filter for only numeric values
+data_numeric <- data_clean_aug %>% 
+  mutate(isAfrica = case_when(continent == 'Africa' ~ 1,
+                              continent != 'Africa' ~ 0)) %>% 
+  mutate(isAmericas = case_when(continent == 'Americas' ~ 1,
+                                continent != 'Americas' ~ 0)) %>% 
+  mutate(isAsia = case_when(continent == 'Asia' ~ 1,
+                            continent == 'Asia' ~ 0)) %>% 
+  mutate(isEurope = case_when(continent == 'Europe' ~ 1,
+                              continent != 'Europe' ~ 0)) %>% 
+  mutate(isOceania = case_when(continent == 'Oceania' ~ 1,
+                               continent != 'Oceania' ~ 0)) %>% 
+  select_if(is.numeric)
 
 
-# Model data
-data_clean_aug %>% ...
+# Model data -------------------------------------------------------------
 
+#PCA fit of Cases
+pca_fit_cases <- data_numeric %>% 
+  select(-Cases) %>% 
+  prcomp(scale. = TRUE)
+
+#PCA fit of Deaths
+pca_fit_deaths <- data_numeric %>% 
+  select(-Deaths) %>% 
+  prcomp(scale. = TRUE)
+
+#PCA fit of Fatality Rate
+pca_fit_FR <- data_numeric %>% 
+  select(-FatalityRate) %>% 
+  prcomp(scale. = TRUE)
 
 # Visualise data ----------------------------------------------------------
 
+#PCA plot for Cases
+plot1 <- pca_fit_cases %>% 
+  augment(data_numeric) %>% 
+  mutate(Cases = log(Cases)) %>% 
+  ggplot(aes(.fittedPC1, .fittedPC2, color = Cases)) +
+  scale_color_viridis(option = 'C',
+                      name = 'log(Cases)') +
+  geom_point(size = 2) +
+  theme(legend.position = "bottom",
+        legend.key.width = unit(1.5, "cm")) +
+  labs(x = 'PC1',
+       y = 'PC2')
+
+#PCA plot for Deaths
+plot2 <- pca_fit_deaths %>% 
+  augment(data_numeric) %>% 
+  mutate(Deaths = log(Deaths)) %>% 
+  ggplot(aes(.fittedPC1, .fittedPC2, color = Deaths)) +
+  scale_color_viridis(option = 'C',
+                      name = 'log(Deaths)') +
+  geom_point(size = 2) +
+  theme(legend.position = "bottom",
+        legend.key.width = unit(1.5, "cm")) +
+  labs(x = 'PC1',
+       y = 'PC2')
+
+#PCA plot for Fatality Rate
+plot3 <- pca_fit_FR %>% 
+  augment(data_numeric) %>% 
+  mutate(FatalityRate = log(FatalityRate)) %>% 
+  ggplot(aes(.fittedPC1, .fittedPC2, color = FatalityRate)) +
+  scale_color_viridis(option = 'C',
+                      name = 'log(Fatality Rate)') +
+  geom_point(size = 2) +
+  theme(legend.position = "bottom",
+        legend.key.width = unit(1.5, "cm")) +
+  labs(x = 'PC1',
+       y = 'PC2')
+
+plot1 + plot2 + plot3
 
 # Box plots of cases per 100k pp, deaths per 100k pp and fatality rate for each continent.
 pl1 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = Casesper100kpp, fill = continent)) +
