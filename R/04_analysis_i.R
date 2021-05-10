@@ -102,10 +102,6 @@ plot3_pca
 
 plot1_pca / plot2_pca 
 
-ggsave("PCA_first_analysis.png", 
-       path = "results/",
-       plot = (plot1_pca / plot2_pca ),width = 15, height = 10)
-
 # Box plots of cases per 100k pp, deaths per 100k pp and fatality rate for each continent.
 pl1 <- analysis_1_clean_aug %>% 
   ggplot(mapping = aes(x = continent, 
@@ -154,9 +150,6 @@ pl3 <- analysis_1_clean_aug %>%
 
 pl1 + pl2 / pl3
 
-ggsave("Boxplot_first_analysis.png", 
-       path = "results/",
-       plot = (pl1 + pl2 / pl3))
 
 # Linear regression
 
@@ -172,9 +165,6 @@ pl4 <- analysis_1_clean_aug %>%
   geom_point()+
   theme(legend.position = "bottom")
 
-ggsave("Scatterplot_smoking_continent.png", 
-       path = "results/",
-       plot = pl4)
 
 # All continents together
 pl5 <- analysis_1_clean_aug %>% 
@@ -186,10 +176,6 @@ pl5 <- analysis_1_clean_aug %>%
   geom_smooth(method = lm) +
   geom_point() +
   theme(legend.position = "bottom")
-
-ggsave("Scatterplot_smoking_all.png", 
-       path = "results/",
-       plot = pl5)
 
 
 # Sanitary access scatterplot
@@ -203,9 +189,6 @@ pl6 <- analysis_1_clean_aug %>%
   geom_point()+
   theme(legend.position = "bottom")
 
-ggsave("Scatterplot_saniacc_all.png", 
-       path = "results/",
-       plot = pl6)
 
 # Density plot, not sure if relevant
 pl7 <- analysis_1_clean_aug %>% 
@@ -214,9 +197,6 @@ pl7 <- analysis_1_clean_aug %>%
   geom_density(alpha = 0.5)+
   labs(x = "Fatality rate",
        y = "Density")
-ggsave("Densityplot_continent.png", 
-       path = "results/",
-       plot = pl7)
 
 # BMI per continent
 analysis_1_clean_aug %>% 
@@ -246,9 +226,32 @@ pl8 <- analysis_1_clean_aug %>%
   labs(x = "Country",
        y = "Fatality rate")
 
+
+# Write data --------------------------------------------------------------
+ggsave("PCA_first_analysis.png", 
+       path = "results/",
+       plot = (plot1_pca / plot2_pca ),width = 15, height = 10)
+
+ggsave("Boxplot_first_analysis.png", 
+       path = "results/",
+       plot = (pl1 + pl2 / pl3))
+
+ggsave("Scatterplot_smoking_continent.png", 
+       path = "results/",
+       plot = pl4)
+
+ggsave("Scatterplot_smoking_all.png", 
+       path = "results/",
+       plot = pl5)
+
+ggsave("Scatterplot_saniacc_all.png", 
+       path = "results/",
+       plot = pl6)
+
+ggsave("Densityplot_continent.png", 
+       path = "results/",
+       plot = pl7)
+
 ggsave("Fatalityrate_europe.png", 
        path = "results/",
        plot = pl8)
-# Write data --------------------------------------------------------------
-write_tsv(...)
-ggsave(...)

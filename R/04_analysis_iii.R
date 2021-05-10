@@ -22,7 +22,10 @@ data2 <- read_tsv(file = "data/03_analysis_2_clean_aug.tsv")
 data_nested <- data1 %>%
   left_join(data2) %>% 
   mutate(continent = as.factor(continent)) %>% 
-  pivot_longer(cols = c(Casesper100kpp, Deathsper100kpp, FatalityRate, PositiveRate),
+  pivot_longer(cols = c(Casesper100kpp, 
+                        Deathsper100kpp, 
+                        FatalityRate, 
+                        PositiveRate),
                names_to = "y_names",
                values_to = "y_values") %>% 
   group_by(y_names) %>%
@@ -52,26 +55,39 @@ data_nested <- data_nested %>%
                                          + BasicSaniAcc 
                                          + PopDens),
                              data = .x))) %>% 
-  mutate(mdl_tidy = map(mdl, ~tidy(.x, conf.int = TRUE))) %>%
-  mutate(anv = map(mdl, ~Anova(.x)))
+  mutate(mdl_tidy = map(mdl, ~tidy(.x, 
+                                   conf.int = TRUE))) %>%
+  mutate(anv = map(mdl, 
+                   ~Anova(.x)))
 
 results_anova <- data_nested %>% 
   select(y_names, anv) %>% 
-  mutate(anv = map(anv, ~cbind(variable = rownames(.x), .x))) %>% 
+  mutate(anv = map(anv, 
+                   ~cbind(variable = rownames(.x), 
+                          .x))) %>% 
   unnest(anv) %>% 
   rename("pvalue" = "Pr(>F)") %>%
   filter(pvalue <= 0.05) %>% 
-  select(y_names, variable, pvalue) %>% 
-  pivot_wider(names_from = y_names, values_from = pvalue) %>% 
+  select(y_names, 
+         variable, 
+         pvalue) %>% 
+  pivot_wider(names_from = y_names, 
+              values_from = pvalue) %>% 
   rename(p.value_Casesper100kpp = Casesper100kpp) %>% 
   rename(p.value_Deathsper100kpp = Deathsper100kpp) %>% 
   rename(p.value_FatalityRate = FatalityRate) %>% 
   rename(p.value_PositiveRate = PositiveRate)
 
 results_estimates <- data_nested %>% 
-  select(y_names, mdl_tidy) %>% 
+  select(y_names, 
+         mdl_tidy) %>% 
   unnest(mdl_tidy) %>% 
-  select(y_names, term, estimate, std.error, conf.low, conf.high)
+  select(y_names, 
+         term, 
+         estimate, 
+         std.error, 
+         conf.low, 
+         conf.high)
 
 
 
