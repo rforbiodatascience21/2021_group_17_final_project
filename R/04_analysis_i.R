@@ -248,5 +248,5 @@ ggsave("Fatalityrate_europe.png",
        path = "results/",
        plot = pl8)
 # Write data --------------------------------------------------------------
-write_tsv(...)
-ggsave(...)
+#write_tsv(...)
+#ggsave(...)
