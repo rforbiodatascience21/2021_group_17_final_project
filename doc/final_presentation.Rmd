@@ -8,7 +8,7 @@ author:
 date: "10/5/2021"
 output: 
   ioslides_presentation:
-    logo: presentation-figure/dtu-logo-png-transparent.png
+    logo: ../presentation-figure/dtu-logo-png-transparent.png
     widescreen: true
 ---
 
@@ -52,20 +52,20 @@ For this project we merged data from two main sources: John Hopkins and Gapminde
 COVID-19 has impacted differently in different countries and the reasons why this has been the case are still under investigation.
 <center>
 
-![](presentation-figure/flecha.png){height=40}
+![](../presentation-figure/flecha.png){height=40}
 
 </center>
 In our project we aim to analyze a set of variables affecting mostly all countries to elucidate which may be the factors affecting COVID-19 outbreak.
 <center>
 
-![](presentation-figure/flecha.png){height=40}
+![](../presentation-figure/flecha.png){height=40}
 
 </center>
 To do this we performed an exploratory analysis using different datasets
 
 ## Methods
 
-![Worflow chart](presentation-figure/Workflow.png){height=400}
+![Worflow chart](../presentation-figure/Workflow.png){height=400}
 
 
 
@@ -75,7 +75,7 @@ For the time series datasets we selected the Country/Region column and the numbe
 The same procedure was appliad to dataset 02.
 ```{r, echo = FALSE, message = FALSE, results = 'hide'}
 
-data01_pres <- read_tsv(file = "data/01_JH_01CovidCases.tsv")
+data01_pres <- read_tsv(file = "../data/01_JH_01CovidCases.tsv")
 ```
 ```{r, echo = FALSE}
 data01_pres
@@ -84,7 +84,7 @@ data01_pres
 ## Methods
 For the rest of datasets we selected the country column and the most recent data (data from the last year registered).
 ```{r, echo = FALSE}
-data06_raw <- read.csv(file = "data/_raw/06_Gap_smoking_adults_percent_of_population_over_age_15.csv")
+data06_raw <- read.csv(file = "../data/_raw/06_Gap_smoking_adults_percent_of_population_over_age_15.csv")
 data06_raw <- data06_raw  %>% 
   select(country, X2005) %>% 
   rename(Smoking = X2005)
@@ -135,63 +135,63 @@ We added the following new attributes to the dataset:
 ## Methods
 ```{r, echo=FALSE, message = FALSE}
 library("patchwork")
-data_clean_aug <- read_tsv(file = "data/03_analysis_1_clean_aug.tsv")
+data_clean_aug <- read_tsv(file = "../data/03_analysis_1_clean_aug.tsv")
 data_clean_aug
 ```
 
-## Data analysis
-![](presentation-figure/plot1.png)
+## Data visualization
+![](../results/Boxplot_first_analysis.png)
 
 
 
 
-## Data analysis
+## Data visualization
 
-![](results/Scatterplot_smoking_all.png){height=400}
-
-
-
-## Data analysis
-
-![](results/Scatterplot_smoking_continent.png){height=400}
-
-## Data analysis
-
-![](results/Scatterplot_saniacc_all.png){height=400}
-
-## Data analysis
-
-![](results/Densityplot_continent.png){height=400}
-
-## Data analysis
-
-![](results/Fatalityrate_europe.png){height=400}
-
-## Data analysis 
-![](results/PCA_first_analysis.png){height=500}
+![](../results/Scatterplot_smoking_all.png){height=400}
 
 
-## Data analysis
 
-![](results/Boxplot_Testing_and_PositiveRate_Continent.png){height=450}
+## Data visualization
 
-## Data analysis
+![](../results/Scatterplot_smoking_continent.png){height=400}
 
-![](results/Cases_vs_Testing_Projection.png){height=450}
+## Data visualization
+
+![](../results/Scatterplot_saniacc_all.png){height=400}
+
+## Data visualization
+
+![](../results/Densityplot_continent.png){height=400}
+
+## Data visualization
+
+![](../results/Fatalityrate_europe.png){height=400}
+
+## PCA
+![](../results/PCA_first_analysis.png){height=500}
 
 
-## Data analysis
+## Data visualization - Second analysis
 
-![](results/Tests_vs_GovernmentalHealthSpending.png){height=450}
+![](../results/Boxplot_Testing_and_PositiveRate_Continent.png){height=450}
+
+## Data visualization - Second analysis
+
+![](../results/Cases_vs_Testing_Projection.png){height=450}
 
 
-## Data analysis
+## Data visualization - Second analysis
 
-![](results/10_Highest_PositiveRate.png){height=450}
+![](../results/Tests_vs_GovernmentalHealthSpending.png){height=450}
 
-## Data analysis
 
-![](results/10_Lowest_PositiveRate.png){height=450}
+## Data visualization - Second analysis
+
+![](../results/10_Highest_PositiveRate.png){height=450}
+
+## Data visualization - Second analysis
+
+![](../results/10_Lowest_PositiveRate.png){height=450}
 
 ## Modelling
 
@@ -208,8 +208,9 @@ For each of the y variables we fitted a linear model without any interaction ter
 
 
 ## Data analysis
+
 ```{r, echo = FALSE, message = FALSE}
-ancova_pvalues_data <- read_tsv(file = "results/Ancova_pvalues.tsv")
+ancova_pvalues_data <- read_tsv(file = "../results/Ancova_pvalues.tsv")
 ancova_pvalues_data
 ```
 
@@ -228,14 +229,14 @@ We have seen that some variables have an effect in the COVID-19 outbreak:
 
 <center>
 
-![](presentation-figure/flecha.png){height=40}
+![](../presentation-figure/flecha.png){height=40}
 
 </center>
 
 It seems that the number of cases and deaths are not really informative about the situation in some countries because the testing rate differs among them.
 <center>
 
-![](presentation-figure/flecha.png){height=40}
+![](../presentation-figure/flecha.png){height=40}
 
 </center>
 
