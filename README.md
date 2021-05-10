@@ -53,8 +53,7 @@ https://www.gapminder.org/data/
 
 ### Other statistics
 - 22: Dictionary of countries and continents - (https://github.com/vincentarelbundock/countrycode/blob/main/dictionary/data_regions.csv)
-- 23: Data on testing for COVID-19 by week and country - (https://www.ecdc.europa.eu/en/publications-data/covid-19-testing)
-- 24: Covid-19 testing rates - (https://github.com/owid/covid-19-data/blob/master/public/data/testing/covid-testing-all-observations.csv)
+- 23: Covid-19 testing rates - (https://github.com/owid/covid-19-data/blob/master/public/data/testing/covid-testing-all-observations.csv)
 
 ## TO DO:
 
@@ -100,9 +99,20 @@ Pre-work:
 - Preparing the presentation and add plots (save them) (**Carlota**)
 - Augment the Covid-19 testing dataset, and create framework for second analysis (**Mathias**)
 
+
+### Work split up Monday
+- Load raw data from the internet (**Mathias**)
+- Move the data wrangling in the load script to the clean script (**Mathias**)
+- Redo presentation - skip code, save tables as tsv-files, save plots as images in the results folder (**Carlota**)
+- PCA (for each y-variable) (**Thomas**)
+- Linear regression (**Annette**)
+
 ## Things to ask Leon:
 
-- final presentation: using premade tables?
-- first augment, then handling the NAs?
-- when is the hand-in on monday?
-- 
+- Final presentation: using premade tables?
+- Or create tables in Rmarkdown? (hiding the code)
+- Presentation: How much code?
+- Presentation: How much should we talk about process, and how much about the results?
+- Such we avoid selecting the variables we are interest in in the load script?
+- Handling of the NAs related to LandSqKm?
+- Augment, drop NA's, or leave it as it is?

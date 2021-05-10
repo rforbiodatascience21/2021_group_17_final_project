@@ -1,0 +1,223 @@
+---
+title: "COVID-19 around the world"
+author:
+ - name: "Annette Lien (s202633)"
+ - name: "Carlota Carbajo Moral (s202424)"
+ - name: "Mathias Fynbo Jensen (s192065)"
+ - name: "Thomas Carvalho Andersen (s202755)"
+date: "10/5/2021"
+output: 
+  ioslides_presentation:
+    logo: presentation-figure/dtu-logo-png-transparent.png
+    widescreen: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Index
+
+- Introduction
+- Methods
+- Results
+- Discussion
+- Conclusion
+
+## Introduction
+
+For this project we merged data from two main sources: John Hopkins and Gapminder.
+
+<div class="columns-2">
+### John Hopkins data - [Repository Link](https://github.com/CSSEGISandData/COVID-19)
+
+- Main datasets of the project
+  - Time series of COVID-19 confirmed cases
+  - Time series of COVID-19 deaths
+  - Population count (IUD)
+  
+
+
+### Gapminder data - [Website Link](https://www.gapminder.org/data/)
+
+- 18 datasets of varying relevance including:  
+  - Life expectancy
+  - Smoking and Alcohol Consumption
+  - Body Mass Index and Basic Sanitation
+
+</div>
+
+## Introduction
+COVID-19 has impacted differently in different countries and the reasons why this has been the case are still under investigation.
+<center>
+
+![](presentation-figure/flecha.png){height=40}
+
+</center>
+In our project we aim to analyze a set of variables affecting mostly all countries to elucidate which may be the most important factors affecting COVID-19 outbreak.
+
+## Methods
+```{r, echo = FALSE, message = FALSE}
+library("tidyverse")
+data01_raw <- read_csv(file = "data/_raw/01_JH_time_series_covid19_confirmed_global.csv")
+data01_raw
+```
+
+## Methods
+For the time series datasets we selected the Country/Region column and the number of cases reported the 29th April 2021.
+
+The same procedure was appliad to dataset 02.
+```{r, echo = FALSE, message = FALSE, results = 'hide'}
+data01_pres <- read_tsv(file = "data/01_JH_01CovidCases.tsv")
+```
+```{r, echo = FALSE}
+data01_pres
+```
+
+## Methods
+For the rest of datasets we selected the country column and the most recent data (data from the last year registered).
+```{r, echo = FALSE}
+data06_raw <- read.csv(file = "data/_raw/06_Gap_smoking_adults_percent_of_population_over_age_15.csv")
+data06_raw <- data06_raw  %>% 
+  select(country, X2005) %>% 
+  rename(Smoking = X2005)
+data06_raw
+```
+Similar procedure for datasets 04 to 24.
+
+
+## Methods
+
+Then we grouped by country and sum the cases in the different regions of the same country.
+```{r, echo=FALSE}
+data01 <- data01_pres %>%
+  group_by(Country) %>% 
+  summarise_all(sum)
+data01
+```
+
+
+## Methods
+
+
+### Main cleaning tasks
+
+- Join John Hopkins data by Country column
+- Join Gapminder data by Country column
+- Remove NA in Gapminder data by replacing by the mean
+- Fix country names so they look the same in both datasets
+- Join both datasets
+
+
+
+## Methods
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+data02_clean <- read_tsv(file = "data/02_data_clean.tsv")
+data02_clean
+```
+
+
+## Methods
+We added the following new attributes to the dataset:
+
+
+- Cases per 100000 inhabitants: $\frac{Cases}{Population}100000$
+- Deaths per 100000 inhabitants: $\frac{Deaths}{Population}100000$
+- Fatality rate: $\frac{Deaths}{Cases}100$
+- Population density: $\frac{Population}{Area}$
+- Fatality class
+  - Low fatality
+  - High fatality
+- BMI class for both genders
+
+## Methods
+```{r, echo=FALSE, message = FALSE}
+library("patchwork")
+data_clean_aug <- read_tsv(file = "data/03_data_clean_aug.tsv")
+data_clean_aug
+```
+
+
+
+## Data analysis
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=7.5, fig.height=5.5}
+pl1 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = Casesper100kpp, fill = continent)) +
+  geom_boxplot(alpha = 0.5) +
+  labs(x = "Continent",
+       y = "Number of cases per 100k inhabitants",
+       fill = "Continent") +
+  theme_classic(base_size = 18,
+                base_family = "Avenir") +
+  theme(legend.position = "none",axis.title = element_text(size = 12),
+        axis.text.x = element_text(size = 8),axis.text.y = element_text(size = 8))
+pl2 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = Deathsper100kpp, fill = continent)) +
+  geom_boxplot(alpha = 0.5) +
+  labs(x = "Continent",
+       y = "Number of deaths per 100k inhabitants",
+       fill = "Continent") +
+  theme_classic(base_size = 18,
+                base_family = "Avenir") +
+  theme(legend.position = "none",axis.title = element_text(size = 8),
+        axis.text.x = element_text(size = 8), axis.text.y = element_text(size = 8))
+pl3 <- data_clean_aug %>% ggplot(mapping = aes(x = continent, y = FatalityRate, fill = continent)) +
+  geom_boxplot(alpha = 0.5) +
+  labs(x = "Continent",
+       y = "Fatality rate",
+       fill = "Continent") +
+  theme_classic(base_size = 18,
+                base_family = "Avenir") +
+  theme(legend.position = "none",axis.title = element_text(size = 8),
+        axis.text.x = element_text(size = 8), axis.text.y = element_text(size = 8))
+
+pl1 + pl2 / pl3
+
+```
+
+## Data analysis
+```{r, echo=FALSE, message=FALSE}
+data_clean_aug %>% 
+  ggplot(mapping = aes(x= Smoking, y = Deathsper100kpp)) + 
+  #facet_wrap(~continent)+ # We can use this or not
+  labs(x = "Smoking index",
+       y = "Number of deaths per 100k inhabitants")+
+  geom_smooth(method = lm) +
+  geom_point()+
+  theme(legend.position = "bottom")
+```
+
+## Data analysis
+```{r, echo=FALSE, message=FALSE}
+data_clean_aug %>% 
+  ggplot(mapping = aes(x= Smoking, y = Deathsper100kpp, fill=continent)) + 
+  #facet_wrap(~continent)+ # We can use this or not
+  labs(x = "Smoking index",
+       y = "Number of deaths per 100k inhabitants")+
+  geom_smooth(method = lm) +
+  geom_point()+
+  theme(legend.position = "bottom")
+```
+
+## Data analysis
+```{r}
+data_clean_aug %>% 
+  ggplot(mapping = aes(x = FatalityRate,
+                     fill=continent)) +
+  geom_density(alpha = 0.5)+
+  labs(x = "Fatality rate",
+       y = "Density")
+
+```
+
+## Data analysis
+```{r}
+data_clean_aug %>% filter(continent=='Europe') %>%
+  ggplot(mapping = aes(x = Country, y = FatalityRate, color=Fatality_class)) + 
+  geom_point() +
+  coord_flip()+
+  geom_hline(yintercept = 2.070798, linetype = "dashed")+
+  theme(legend.position = "right",axis.text.y = element_text(size = 7))+
+  labs(x = "Country",
+       y = "Fatality rate")
+```
+

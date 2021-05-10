@@ -17,10 +17,14 @@ data_testing_clean <- read_tsv(file = "data/02_data_testing_clean.tsv")
 
 # Wrangle data ------------------------------------------------------------
 data_clean_aug <- data_clean %>%
-  mutate(Casesper100kpp = round((Cases / Population * 100000), digits = 2)) %>% 
-  mutate(Deathsper100kpp = round((Deaths / Population * 100000), digits = 2)) %>%
-  mutate(FatalityRate = round((Deaths / Cases * 100), digits = 2)) %>%
-  mutate(PopDens = round(Population/LandSqkm,digits = 2)) %>%
+  mutate(Casesper100kpp = round((Cases / Population * 100000), 
+                                digits = 2)) %>% 
+  mutate(Deathsper100kpp = round((Deaths / Population * 100000), 
+                                 digits = 2)) %>%
+  mutate(FatalityRate = round((Deaths / Cases * 100), 
+                              digits = 2)) %>%
+  mutate(PopDens = round(Population/LandSqkm,
+                         digits = 2)) %>%
   mutate(Fatality_class = case_when(FatalityRate < mean(FatalityRate) ~ "low fatality",
                                     FatalityRate > mean(FatalityRate) ~ "high fatality")) %>%
   mutate(BMI_m_class = case_when(BMI_m < 18.5 ~ "underweight",
@@ -41,12 +45,18 @@ data_clean_aug <- data_clean %>%
 
 
 data_testing_clean_aug <- data_testing_clean %>%
-  mutate(PositiveRate = round((Cases / CumulativeTesting), digits = 3)) %>% 
-  mutate(Tests_pp = round((CumulativeTesting / Population), digits = 3)) %>%
-  mutate(Casesper100kpp = round((Cases / Population * 100000), digits = 2)) %>% 
-  mutate(Deathsper100kpp = round((Deaths / Population * 100000), digits = 2)) %>%
-  mutate(FatalityRate = round((Deaths / Cases * 100), digits = 2)) %>%
-  mutate(PopDens = round(Population/LandSqkm,digits = 2)) %>%
+  mutate(PositiveRate = round((Cases / CumulativeTesting), 
+                              digits = 3)) %>% 
+  mutate(Tests_pp = round((CumulativeTesting / Population), 
+                          digits = 3)) %>%
+  mutate(Casesper100kpp = round((Cases / Population * 100000), 
+                                digits = 2)) %>% 
+  mutate(Deathsper100kpp = round((Deaths / Population * 100000), 
+                                 digits = 2)) %>%
+  mutate(FatalityRate = round((Deaths / Cases * 100), 
+                              digits = 2)) %>%
+  mutate(PopDens = round(Population/LandSqkm,
+                         digits = 2)) %>%
   mutate(Fatality_class = case_when(FatalityRate < mean(FatalityRate) ~ "low fatality",
                                     FatalityRate > mean(FatalityRate) ~ "high fatality")) %>%
   mutate(BMI_m_class = case_when(BMI_m < 18.5 ~ "underweight",
